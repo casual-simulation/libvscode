@@ -14,6 +14,9 @@ async function main() {
 	);
 
 	const finalLoaderSource = initialSource + loaderSource;
+	await fs.promises.mkdir(path.resolve(__dirname, '../../dist/static'), {
+		recursive: true
+	});
 	await fs.promises.writeFile(path.resolve(__dirname, '../../dist/static/loader.js'), finalLoaderSource, 'utf8');
 
 	await esbuild.build({
