@@ -12,6 +12,7 @@ function main() {
 	./build/sync-code.sh
 	./build/build-vscode.sh
 	./build/build-github1s-extensions.sh
+	node ./build/build-entry.js
 	./package.sh
 
 	echo "all build done!"

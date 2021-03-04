@@ -20,7 +20,7 @@ import { Event, Emitter } from 'vs/base/common/event';
 import { generateUuid } from 'vs/base/common/uuid';
 import { CancellationToken } from 'vs/base/common/cancellation';
 import { streamToBuffer } from 'vs/base/common/buffer';
-import { Disposable } from 'vs/base/common/lifecycle';
+import { Disposable, IDisposable } from 'vs/base/common/lifecycle';
 import { request } from 'vs/base/parts/request/browser/request';
 import {
 	isFolderToOpen,
@@ -33,7 +33,7 @@ import { Schemas } from 'vs/base/common/network';
 import product from 'vs/platform/product/common/product';
 import { parseLogLevel } from 'vs/platform/log/common/log';
 import { getBrowserUrl, replaceBrowserUrl } from 'vs/github1s/util';
-import { renderNotification } from 'vs/github1s/notification';
+import { IScannedBuiltinExtension } from 'vs/workbench/services/extensionManagement/browser/builtinExtensionsScannerService';
 
 // custom vs code commands defined by github1s
 const getGitHub1sCustomCommands: () => {
@@ -516,22 +516,15 @@ class WindowIndicator implements IWindowIndicator {
 	}
 }
 
-(function () {
-	// Find config by checking for DOM
-	const configElement = document.getElementById(
-		'vscode-workbench-web-configuration'
-	);
-	const configElementAttribute = configElement
-		? configElement.getAttribute('data-settings')
-		: undefined;
-	if (!configElement || !configElementAttribute) {
-		throw new Error('Missing web configuration element');
-	}
-
-	const config: IWorkbenchConstructionOptions & {
+export function init(
+	element: HTMLElement,
+	config: IWorkbenchConstructionOptions & {
 		folderUri?: UriComponents;
 		workspaceUri?: UriComponents;
-	} = JSON.parse(configElementAttribute);
+	}, builtinExtensions: IScannedBuiltinExtension[] = []): IDisposable {
+	if (!config) {
+		throw new Error('Missing web configuration');
+	}
 
 	// Revive static extension locations
 	if (Array.isArray(config.staticExtensions)) {
@@ -654,11 +647,8 @@ class WindowIndicator implements IWindowIndicator {
 		  }
 		: undefined;
 
-	// Remove the html load spinner
-	document.querySelector('#load-spinner')?.remove();
-
 	// Finally create workbench
-	create(document.body, {
+	return create(element, {
 		...config,
 		commands: getGitHub1sCustomCommands(),
 		logLevel: logLevel ? parseLogLevel(logLevel) : undefined,
@@ -670,6 +660,4 @@ class WindowIndicator implements IWindowIndicator {
 		urlCallbackProvider: new PollingURLCallbackProvider(),
 		credentialsProvider: new LocalStorageCredentialsProvider(),
 	});
-
-	setTimeout(() => renderNotification(), 1000);
-})();
+}

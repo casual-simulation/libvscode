@@ -24,7 +24,7 @@ const debounce = (func, delay) => {
 
 const autoSyncVscodeOut = async () => {
 	const SOURCE = path.join(APP_ROOT, 'lib/vscode/out');
-	const TARGET = path.join(APP_ROOT, 'dist/intermediate/static/vscode');
+	const TARGET = path.join(APP_ROOT, 'dist/static/vscode');
 
 	await util.promisify(cp.exec)(`rsync -a ${SOURCE}/ ${TARGET}`);
 
@@ -39,7 +39,7 @@ const autoSyncVscodeOut = async () => {
 
 const autoSyncGitHub1sExtension = async () => {
 	const SOURCE = path.join(APP_ROOT, 'extensions');
-	const TARGET = path.join(APP_ROOT, 'dist/intermediate/static/extensions');
+	const TARGET = path.join(APP_ROOT, 'dist/static/extensions');
 
 	await util.promisify(cp.exec)(`rsync -a ${SOURCE}/ ${TARGET}`);
 
@@ -53,7 +53,7 @@ const autoSyncGitHub1sExtension = async () => {
 };
 
 const main = () => {
-	fs.ensureDirSync(path.join(APP_ROOT, 'dist/intermediate/static'));
+	fs.ensureDirSync(path.join(APP_ROOT, 'dist/static'));
 
 	autoSyncVscodeOut();
 	autoSyncGitHub1sExtension();

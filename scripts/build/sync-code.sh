@@ -7,7 +7,7 @@ APP_ROOT=$(pwd)
 # sync src/* to vscode
 function main() {
 	cd ${APP_ROOT}
-	rsync -a src/vscode lib/vscode/src
+	rsync -a src/vscode/ lib/vscode/src
 }
 
 main "$@"

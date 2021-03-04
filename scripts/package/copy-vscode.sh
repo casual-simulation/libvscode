@@ -6,8 +6,8 @@ APP_ROOT=$(pwd)
 
 function main() {
 	cd ${APP_ROOT}
-	mkdir -p dist/intermediate/static
-	rsync -a --del lib/vscode/out-vscode-min/ dist/intermediate/static/vscode
+	mkdir -p dist/static
+	rsync -a --del lib/vscode/out-vscode-min/ dist/static/vscode
 
 	echo "copy vscode done!"
 }

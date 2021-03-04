@@ -7,12 +7,12 @@ const http = require('http');
 const handler = require('serve-handler');
 
 const APP_ROOT = path.join(__dirname, '..');
-const options = { public: path.join(APP_ROOT, 'dist/intermediate'), cleanUrls: false };
+const options = { public: path.join(APP_ROOT, 'dist'), cleanUrls: false };
 
 const server = http.createServer((request, response) => {
 	const urlObj = url.parse(request.url);
 	return fs.access(
-		path.join(APP_ROOT, 'dist/intermediate', urlObj.pathname),
+		path.join(APP_ROOT, 'dist', urlObj.pathname),
 		fs.constants.F_OK,
 		(error) => {
 			if (!error && urlObj.pathname !== '/') {
