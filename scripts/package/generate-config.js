@@ -80,7 +80,7 @@ const scanGithub1sExtensions = () => {
 };
 
 const main = () => {
-	const CONFIGURE_PATH = path.join(APP_ROOT, 'dist/static/configure');
+	const CONFIGURE_PATH = path.join(APP_ROOT, 'dist/intermediate/static/configure');
 	const extensions = [...scanBuiltinExtensions(), ...scanGithub1sExtensions()];
 
 	fs.ensureDirSync(CONFIGURE_PATH);

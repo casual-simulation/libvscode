@@ -6,15 +6,15 @@ APP_ROOT=$(pwd)
 
 function main() {
 	cd ${APP_ROOT}
-	mkdir -p dist
+	mkdir -p dist/intermediate
 	if [ "${IS_BUILD-}" ];
 	then
-		cp resources/index.html dist/index.html
+		cp resources/index.html dist/intermediate/index.html
 	else
-		cp resources/index-dev.html dist/index.html
+		cp resources/index-dev.html dist/intermediate/index.html
 	fi
-	cp resources/favicon.ico dist
-	cp resources/manifest.json dist
+	cp resources/favicon.ico dist/intermediate
+	cp resources/manifest.json dist/intermediate
 
 	echo "copy resources done!"
 }
