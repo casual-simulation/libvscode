@@ -647,6 +647,12 @@ export function init(
 		  }
 		: undefined;
 
+	if (!(<any>globalThis).vscode) {
+		(<any>globalThis).vscode = {};
+	}
+
+	(<any>globalThis).vscode.builtinExtensions = builtinExtensions;
+
 	// Finally create workbench
 	return create(element, {
 		...config,

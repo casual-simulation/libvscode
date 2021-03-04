@@ -48,6 +48,14 @@ async function initWorkbench(options: InitVscodeOptions) {
             reject(err);
         }
     });
+
+    let builtinExtensions: InitVscodeOptions['builtinExtensions'];
+    if (options.builtinExtensions) {
+        builtinExtensions = options.builtinExtensions;
+    } else {
+        console.log('Fetching builtin extensions from extensions.json');
+        builtinExtensions = JSON.parse(await (await fetch(publicPath + '/configure/extensions.json')).text());
+    }
     
     return workbench.init(
         options.container, 
@@ -56,7 +64,7 @@ async function initWorkbench(options: InitVscodeOptions) {
             webWorkerExtensionHostIframeSrc: `${vscodePath}/vs/workbench/services/extensions/worker/httpWebWorkerExtensionHostIframe.html`,
             ...options.workbench
         },
-        options.builtinExtensions);
+        builtinExtensions);
 }
 
 /**
