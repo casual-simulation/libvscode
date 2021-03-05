@@ -11,6 +11,13 @@ import type { IScannedBuiltinExtension } from 'vs/workbench/services/extensionMa
 declare let VSCODE_VERSION_HASH: string;
 
 /**
+ * Gets the hash that libvscode was built from.
+ */
+export function vscodeVersionHash(): string {
+    return VSCODE_VERSION_HASH;
+}
+
+/**
  * Initializes VSCode with the given options.
  * @param options The options that should be used to initialize vscode.
  */
