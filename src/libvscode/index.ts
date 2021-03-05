@@ -31,6 +31,21 @@ export async function initVSCode(
     return await initWorkbench(options);
 }
 
+/**
+ * Fetches the list of builtin extensions.
+ * @param publicPath The public path that the extensions should be fetched from.
+ * @param vscodeVersionHash The version hash that libvscode was built from.
+ */
+export async function fetchBuiltinExtensions(publicPath: string, vscodeVersionHash: string = VSCODE_VERSION_HASH): Promise<IScannedBuiltinExtension[]> {
+    console.log('Fetching builtin extensions from extensions.json');
+    let builtinExtensions: IScannedBuiltinExtension[] = JSON.parse(
+        await (
+            await fetch(`${publicPath}/${vscodeVersionHash}/configure/extensions.json`)
+        ).text()
+    );
+    return builtinExtensions;
+}
+
 let loaded = false;
 
 async function initLoader(options: InitVscodeOptions) {
@@ -78,11 +93,7 @@ async function initWorkbench(options: InitVscodeOptions) {
         builtinExtensions = options.builtinExtensions;
     } else {
         console.log('Fetching builtin extensions from extensions.json');
-        builtinExtensions = JSON.parse(
-            await (
-                await fetch(options.publicPath + '/configure/extensions.json')
-            ).text()
-        );
+        builtinExtensions = await fetchBuiltinExtensions(options.publicPath, options.vscodeVersionHash);
     }
 
     const originPath = `${globalThis.location.origin}${options.publicPath}/${options.vscodeVersionHash}`;
