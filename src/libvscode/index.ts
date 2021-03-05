@@ -1,7 +1,3 @@
-const publicPath = (<any>globalThis).VSCODE_PUBLIC_PATH ?? `/static`;
-const originPath = `${globalThis.location.origin}${publicPath}`;
-const vscodePath = `${originPath}/vscode`;
-
 import type {
 	IDisposable,
 	IWorkbenchConstructionOptions,
@@ -13,23 +9,31 @@ import type { IScannedBuiltinExtension } from 'vs/workbench/services/extensionMa
  * Initializes VSCode with the given options.
  * @param options The options that should be used to initialize vscode.
  */
-export async function init(options: InitVscodeOptions): Promise<IDisposable> {
+export async function initVSCode(
+	options: InitVscodeOptions
+): Promise<IDisposable> {
 	if (!options.container) {
 		throw new Error('A container must be provided.');
 	}
-	await initLoader(options.container);
+	if (!options.publicPath) {
+		throw new Error('A public path must be provided');
+	}
+	(<any>globalThis).VSCODE_PUBLIC_PATH = options.publicPath;
+	await initLoader(options);
 	return await initWorkbench(options);
 }
 
 let loaded = false;
 
-async function initLoader(container: HTMLElement) {
+async function initLoader(options: InitVscodeOptions) {
 	if (!loaded) {
 		loaded = true;
+		const originPath = `${globalThis.location.origin}${options.publicPath}`;
+		const vscodePath = `${originPath}/vscode`;
 		await Promise.all([
-			injectScript(container, `${originPath}/loader.js`),
+			injectScript(options.container, `${originPath}/loader.js`),
 			injectScript(
-				container,
+				options.container,
 				`${vscodePath}/vs/workbench/workbench.web.api.js`
 			),
 		]);
@@ -65,9 +69,14 @@ async function initWorkbench(options: InitVscodeOptions) {
 	} else {
 		console.log('Fetching builtin extensions from extensions.json');
 		builtinExtensions = JSON.parse(
-			await (await fetch(publicPath + '/configure/extensions.json')).text()
+			await (
+				await fetch(options.publicPath + '/configure/extensions.json')
+			).text()
 		);
 	}
+
+	const originPath = `${globalThis.location.origin}${options.publicPath}`;
+	const vscodePath = `${originPath}/vscode`;
 
 	return workbench.init(
 		options.container,
@@ -90,10 +99,22 @@ export interface InitVscodeOptions {
 	container: HTMLElement;
 
 	/**
+	 * The path that the VSCode scripts & assets are available at.
+	 */
+	publicPath: string;
+
+	/**
 	 * The settings used to initialize the vscode workbench.
 	 */
 	workbench: IWorkbenchConstructionOptions & {
+		/**
+		 * The folder that should be opened.
+		 */
 		folderUri?: UriComponents;
+
+		/**
+		 * The workspace that should be opened.
+		 */
 		workspaceUri?: UriComponents;
 	};
 

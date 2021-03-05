@@ -1,8 +1,8 @@
-import { init } from 'libvscode';
+import { initVSCode } from 'libvscode';
 
-console.log('Start!');
-init({
+initVSCode({
 	container: document.body,
+	publicPath: '/static',
 	workbench: {
 		// the empty authority means github1s should get it from `window.location.href`
 		folderUri: { scheme: 'github1s', authority: '', path: '/' },
