@@ -8,7 +8,7 @@ import type { IScannedBuiltinExtension } from 'vs/workbench/services/extensionMa
 /**
  * The default VSCode version hash that is injected into this file by the build process.
  */
-declare var VSCODE_VERSION_HASH: string;
+declare let VSCODE_VERSION_HASH: string;
 
 /**
  * Initializes VSCode with the given options.
@@ -106,7 +106,7 @@ export enum LogLevel {
     Warning,
     Error,
     Critical,
-    Off
+    Off,
 }
 
 /**

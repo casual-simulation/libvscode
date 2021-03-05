@@ -2,9 +2,7 @@
  * Initializes VSCode with the given options.
  * @param options The options that should be used to initialize vscode.
  */
-export function initVSCode(
-    options: InitVscodeOptions
-): Promise<IDisposable>;
+export function initVSCode(options: InitVscodeOptions): Promise<IDisposable>;
 
 /**
  * Options that can be provided to initialize vscode.
@@ -46,10 +44,7 @@ export interface InitVscodeOptions {
     builtinExtensions?: IScannedBuiltinExtension[];
 }
 
-
-
 interface IWorkbenchConstructionOptions {
-
     //#region Connection related configuration
 
     /**
@@ -98,10 +93,9 @@ interface IWorkbenchConstructionOptions {
     /**
      * Endpoints to be used for proxying authentication code exchange calls in the browser.
      */
-    readonly codeExchangeProxyEndpoints?: { [providerId: string]: string }
+    readonly codeExchangeProxyEndpoints?: { [providerId: string]: string };
 
     //#endregion
-
 
     //#region Workbench configuration
 
@@ -178,7 +172,6 @@ interface IWorkbenchConstructionOptions {
 
     //#endregion
 
-
     //#region Update/Quality related
 
     /**
@@ -192,7 +185,6 @@ interface IWorkbenchConstructionOptions {
     readonly productQualityChangeHandler?: IProductQualityChangeHandler;
 
     //#endregion
-
 
     //#region Branding
 
@@ -222,7 +214,6 @@ interface IWorkbenchConstructionOptions {
 
     //#endregion
 
-
     //#region Diagnostics
 
     /**
@@ -249,7 +240,6 @@ export interface IScannedBuiltinExtension {
 export interface IDisposable {
     dispose(): void;
 }
-
 
 export class DisposableStore implements IDisposable {
     static DISABLE_DISPOSED_WARNING: boolean;
@@ -286,7 +276,6 @@ export class DisposableStore implements IDisposable {
  * ```
  */
 export class URI implements UriComponents {
-
     static isUri(thing: any): thing is URI;
 
     /**
@@ -319,7 +308,14 @@ export class URI implements UriComponents {
     /**
      * @internal
      */
-    protected constructor(scheme: string, authority?: string, path?: string, query?: string, fragment?: string, _strict?: boolean);
+    protected constructor(
+        scheme: string,
+        authority?: string,
+        path?: string,
+        query?: string,
+        fragment?: string,
+        _strict?: boolean
+    );
 
     /**
      * @internal
@@ -329,7 +325,14 @@ export class URI implements UriComponents {
     /**
      * @internal
      */
-    protected constructor(schemeOrData: string | UriComponents, authority?: string, path?: string, query?: string, fragment?: string, _strict?: boolean);
+    protected constructor(
+        schemeOrData: string | UriComponents,
+        authority?: string,
+        path?: string,
+        query?: string,
+        fragment?: string,
+        _strict?: boolean
+    );
 
     // ---- filesystem path -----------------------
 
@@ -361,7 +364,13 @@ export class URI implements UriComponents {
 
     // ---- modify to new -------------------------
 
-    with(change: { scheme?: string; authority?: string | null; path?: string | null; query?: string | null; fragment?: string | null }): URI;
+    with(change: {
+        scheme?: string;
+        authority?: string | null;
+        path?: string | null;
+        query?: string | null;
+        fragment?: string | null;
+    }): URI;
 
     // ---- parse & validate ------------------------
 
@@ -396,7 +405,13 @@ export class URI implements UriComponents {
      */
     static file(path: string): URI;
 
-    static from(components: { scheme: string; authority?: string; path?: string; query?: string; fragment?: string }): URI;
+    static from(components: {
+        scheme: string;
+        authority?: string;
+        path?: string;
+        query?: string;
+        fragment?: string;
+    }): URI;
 
     /**
      * Join a URI path with path fragments and normalizes the resulting path.
@@ -427,8 +442,12 @@ export class URI implements UriComponents {
     static revive(data: UriComponents | URI): URI;
     static revive(data: UriComponents | URI | undefined): URI | undefined;
     static revive(data: UriComponents | URI | null): URI | null;
-    static revive(data: UriComponents | URI | undefined | null): URI | undefined | null;
-    static revive(data: UriComponents | URI | undefined | null): URI | undefined | null;
+    static revive(
+        data: UriComponents | URI | undefined | null
+    ): URI | undefined | null;
+    static revive(
+        data: UriComponents | URI | undefined | null
+    ): URI | undefined | null;
 }
 
 export interface UriComponents {
@@ -453,7 +472,6 @@ export interface IWebSocket {
     close(): void;
 }
 
-
 export interface IResourceUriProvider {
     (uri: URI): URI;
 }
@@ -473,7 +491,6 @@ export interface IExternalUriResolver {
 }
 
 export interface ITunnelProvider {
-
     /**
      * Support for creating tunnels.
      */
@@ -486,11 +503,14 @@ export interface ITunnelProvider {
 }
 
 export interface ITunnelFactory {
-    (tunnelOptions: ITunnelOptions, tunnelCreationOptions: TunnelCreationOptions): Promise<ITunnel> | undefined;
+    (
+        tunnelOptions: ITunnelOptions,
+        tunnelCreationOptions: TunnelCreationOptions
+    ): Promise<ITunnel> | undefined;
 }
 
 export interface ITunnelOptions {
-    remoteAddress: { port: number, host: string };
+    remoteAddress: { port: number; host: string };
 
     /**
      * The desired local port. If this port can't be used, then another will be chosen.
@@ -508,7 +528,7 @@ export interface TunnelCreationOptions {
 }
 
 export interface ITunnel extends IDisposable {
-    remoteAddress: { port: number, host: string };
+    remoteAddress: { port: number; host: string };
 
     /**
      * The complete local address(ex. localhost:1234)
@@ -526,12 +546,11 @@ export interface IShowPortCandidate {
 }
 
 export interface IWorkspaceCommand {
-
     /**
      * An identifier for the command. Commands can be executed from extensions
      * using the `vscode.commands.executeCommand` API using that command ID.
      */
-    id: string,
+    id: string;
 
     /**
      * A function that is being executed with any arguments passed over. The
@@ -544,7 +563,6 @@ export interface IWorkspaceCommand {
 }
 
 export interface IHomeIndicator {
-
     /**
      * The link to open when clicking the home indicator.
      */
@@ -563,7 +581,6 @@ export interface IHomeIndicator {
 }
 
 export interface IWindowIndicator {
-
     /**
      * Triggering this event will cause the window indicator to update.
      */
@@ -591,11 +608,10 @@ export interface IWindowIndicator {
 export enum ColorScheme {
     DARK = 'dark',
     LIGHT = 'light',
-    HIGH_CONTRAST = 'hc'
+    HIGH_CONTRAST = 'hc',
 }
 
 export interface IInitialColorTheme {
-
     /**
      * Initial color theme type.
      */
@@ -609,42 +625,74 @@ export interface IInitialColorTheme {
 
 export interface IDefaultSideBarLayout {
     visible?: boolean;
-    containers?: ({
-        id: 'explorer' | 'run' | 'scm' | 'search' | 'extensions' | 'remote' | string;
-        active: true;
-        order?: number;
-        views?: {
-            id: string;
-            order?: number;
-            visible?: boolean;
-            collapsed?: boolean;
-        }[];
-    } | {
-        id: 'explorer' | 'run' | 'scm' | 'search' | 'extensions' | 'remote' | string;
-        active?: false;
-        order?: number;
-        visible?: boolean;
-        views?: {
-            id: string;
-            order?: number;
-            visible?: boolean;
-            collapsed?: boolean;
-        }[];
-    })[];
+    containers?: (
+        | {
+              id:
+                  | 'explorer'
+                  | 'run'
+                  | 'scm'
+                  | 'search'
+                  | 'extensions'
+                  | 'remote'
+                  | string;
+              active: true;
+              order?: number;
+              views?: {
+                  id: string;
+                  order?: number;
+                  visible?: boolean;
+                  collapsed?: boolean;
+              }[];
+          }
+        | {
+              id:
+                  | 'explorer'
+                  | 'run'
+                  | 'scm'
+                  | 'search'
+                  | 'extensions'
+                  | 'remote'
+                  | string;
+              active?: false;
+              order?: number;
+              visible?: boolean;
+              views?: {
+                  id: string;
+                  order?: number;
+                  visible?: boolean;
+                  collapsed?: boolean;
+              }[];
+          }
+    )[];
 }
 
 export interface IDefaultPanelLayout {
     visible?: boolean;
-    containers?: ({
-        id: 'terminal' | 'debug' | 'problems' | 'output' | 'comments' | string;
-        order?: number;
-        active: true;
-    } | {
-        id: 'terminal' | 'debug' | 'problems' | 'output' | 'comments' | string;
-        order?: number;
-        active?: false;
-        visible?: boolean;
-    })[];
+    containers?: (
+        | {
+              id:
+                  | 'terminal'
+                  | 'debug'
+                  | 'problems'
+                  | 'output'
+                  | 'comments'
+                  | string;
+              order?: number;
+              active: true;
+          }
+        | {
+              id:
+                  | 'terminal'
+                  | 'debug'
+                  | 'problems'
+                  | 'output'
+                  | 'comments'
+                  | string;
+              order?: number;
+              active?: false;
+              visible?: boolean;
+          }
+    )[];
 }
 
 export interface IDefaultView {
@@ -663,7 +711,6 @@ export interface IDefaultLayout {
 }
 
 export interface IProductQualityChangeHandler {
-
     /**
      * Handler is being called when the user wants to switch between
      * `insider` or `stable` product qualities.
@@ -695,7 +742,6 @@ export interface ISettingsSyncOptions {
 export type IWorkspace = { workspaceUri: URI } | { folderUri: URI } | undefined;
 
 export interface IWorkspaceProvider {
-
     /**
      * The initial workspace to open.
      */
@@ -716,15 +762,24 @@ export interface IWorkspaceProvider {
      * to the opening window via the `IWorkspaceProvider.payload` property.
      * @param payload optional payload to send to the workspace to open.
      */
-    open(workspace: IWorkspace, options?: { reuse?: boolean, payload?: object }): Promise<void>;
+    open(
+        workspace: IWorkspace,
+        options?: { reuse?: boolean; payload?: object }
+    ): Promise<void>;
 }
 
 export interface ICredentialsProvider {
     getPassword(service: string, account: string): Promise<string | null>;
-    setPassword(service: string, account: string, password: string): Promise<void>;
+    setPassword(
+        service: string,
+        account: string,
+        password: string
+    ): Promise<void>;
     deletePassword(service: string, account: string): Promise<boolean>;
     findPassword(service: string): Promise<string | null>;
-    findCredentials(service: string): Promise<Array<{ account: string, password: string }>>;
+    findCredentials(
+        service: string
+    ): Promise<Array<{ account: string; password: string }>>;
 }
 
 export interface ICredentialsService extends ICredentialsProvider {
@@ -733,7 +788,6 @@ export interface ICredentialsService extends ICredentialsProvider {
 }
 
 export interface IURLCallbackProvider {
-
     /**
      * Indicates that a Uri has been opened outside of VSCode. The Uri
      * will be forwarded to all installed Uri handlers in the system.
@@ -763,7 +817,6 @@ export interface IUpdate {
 }
 
 export interface IUpdateProvider {
-
     /**
      * Should return with the `IUpdate` object if an update is
      * available or `null` otherwise to signal that there are
@@ -780,12 +833,12 @@ export interface IBuiltInExtension {
 }
 
 export type ConfigurationSyncStore = {
-    web?: Partial<Omit<ConfigurationSyncStore, 'web'>>,
-    url: string,
-    insidersUrl: string,
-    stableUrl: string,
-    canSwitch: boolean,
-    authenticationProviders: IStringDictionary<{ scopes: string[] }>
+    web?: Partial<Omit<ConfigurationSyncStore, 'web'>>;
+    url: string;
+    insidersUrl: string;
+    stableUrl: string;
+    canSwitch: boolean;
+    authenticationProviders: IStringDictionary<{ scopes: string[] }>;
 };
 
 export interface IProductConfiguration {
@@ -830,14 +883,18 @@ export interface IProductConfiguration {
         readonly recommendationsUrl: string;
     };
 
-    readonly extensionTips?: { [id: string]: string; };
+    readonly extensionTips?: { [id: string]: string };
     readonly extensionImportantTips?: IStringDictionary<ImportantExtensionTip>;
-    readonly configBasedExtensionTips?: { [id: string]: IConfigBasedExtensionTip; };
-    readonly exeBasedExtensionTips?: { [id: string]: IExeBasedExtensionTip; };
-    readonly remoteExtensionTips?: { [remoteName: string]: IRemoteExtensionTip; };
-    readonly extensionKeywords?: { [extension: string]: readonly string[]; };
+    readonly configBasedExtensionTips?: {
+        [id: string]: IConfigBasedExtensionTip;
+    };
+    readonly exeBasedExtensionTips?: { [id: string]: IExeBasedExtensionTip };
+    readonly remoteExtensionTips?: {
+        [remoteName: string]: IRemoteExtensionTip;
+    };
+    readonly extensionKeywords?: { [extension: string]: readonly string[] };
     readonly keymapExtensionTips?: readonly string[];
-    readonly trustedExtensionUrlPublicKeys?: { [id: string]: string[]; };
+    readonly trustedExtensionUrlPublicKeys?: { [id: string]: string[] };
 
     readonly crashReporter?: {
         readonly companyName: string;
@@ -850,8 +907,8 @@ export interface IProductConfiguration {
     };
 
     readonly sendASmile?: {
-        readonly reportIssueUrl: string,
-        readonly requestFeatureUrl: string
+        readonly reportIssueUrl: string;
+        readonly requestFeatureUrl: string;
     };
 
     readonly documentationUrl?: string;
@@ -872,14 +929,16 @@ export interface IProductConfiguration {
     readonly npsSurveyUrl?: string;
     readonly surveys?: readonly ISurveyData[];
 
-    readonly checksums?: { [path: string]: string; };
+    readonly checksums?: { [path: string]: string };
     readonly checksumFailMoreInfoUrl?: string;
 
     readonly appCenter?: IAppCenterConfiguration;
 
     readonly portable?: string;
 
-    readonly extensionKind?: { readonly [extensionId: string]: ExtensionKind[]; };
+    readonly extensionKind?: {
+        readonly [extensionId: string]: ExtensionKind[];
+    };
     readonly extensionAllowedProposedApi?: readonly string[];
 
     readonly msftInternalDomains?: string[];
@@ -894,33 +953,46 @@ export interface IProductConfiguration {
  */
 export type IStringDictionary<V> = Record<string, V>;
 
-
 /**
  * An interface for a JavaScript object that
  * acts a dictionary. The keys are numbers.
  */
 export type INumberDictionary<V> = Record<number, V>;
 
-export type ImportantExtensionTip = { name: string; languages?: string[]; pattern?: string; isExtensionPack?: boolean };
+export type ImportantExtensionTip = {
+    name: string;
+    languages?: string[];
+    pattern?: string;
+    isExtensionPack?: boolean;
+};
 
 export interface IAppCenterConfiguration {
     readonly 'win32-ia32': string;
     readonly 'win32-x64': string;
     readonly 'linux-x64': string;
-    readonly 'darwin': string;
+    readonly darwin: string;
 }
 
 export interface IConfigBasedExtensionTip {
     configPath: string;
     configName: string;
-    recommendations: IStringDictionary<{ name: string, remotes?: string[], important?: boolean, isExtensionPack?: boolean }>;
+    recommendations: IStringDictionary<{
+        name: string;
+        remotes?: string[];
+        important?: boolean;
+        isExtensionPack?: boolean;
+    }>;
 }
 
 export interface IExeBasedExtensionTip {
     friendlyName: string;
     windowsPath?: string;
     important?: boolean;
-    recommendations: IStringDictionary<{ name: string, important?: boolean, isExtensionPack?: boolean }>;
+    recommendations: IStringDictionary<{
+        name: string;
+        important?: boolean;
+        isExtensionPack?: boolean;
+    }>;
 }
 
 export interface IRemoteExtensionTip {
@@ -943,9 +1015,8 @@ export enum LogLevel {
     Warning,
     Error,
     Critical,
-    Off
+    Off,
 }
-
 
 export interface ICommand {
     command: string;
@@ -960,7 +1031,7 @@ export interface IConfigurationProperty {
 }
 
 export interface IConfiguration {
-    properties: { [key: string]: IConfigurationProperty; };
+    properties: { [key: string]: IConfigurationProperty };
 }
 
 export interface IDebugger {
@@ -1021,7 +1092,7 @@ export interface IView {
 export interface IColor {
     id: string;
     description: string;
-    defaults: { light: string, dark: string, highContrast: string };
+    defaults: { light: string; dark: string; highContrast: string };
 }
 
 export interface IWebviewEditor {
@@ -1088,11 +1159,11 @@ export interface IExtensionManifest {
     readonly extensionPack?: string[];
     readonly extensionKind?: ExtensionKind | ExtensionKind[];
     readonly contributes?: IExtensionContributions;
-    readonly repository?: { url: string; };
-    readonly bugs?: { url: string; };
+    readonly repository?: { url: string };
+    readonly bugs?: { url: string };
     readonly enableProposedApi?: boolean;
     readonly api?: string;
-    readonly scripts?: { [key: string]: string; };
+    readonly scripts?: { [key: string]: string };
 }
 
 export interface ILocalization {
@@ -1113,5 +1184,9 @@ export interface ITranslation {
  * can be subscribed. The event is the subscriber function itself.
  */
 export interface Event<T> {
-    (listener: (e: T) => any, thisArgs?: any, disposables?: IDisposable[] | DisposableStore): IDisposable;
+    (
+        listener: (e: T) => any,
+        thisArgs?: any,
+        disposables?: IDisposable[] | DisposableStore
+    ): IDisposable;
 }
