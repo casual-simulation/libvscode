@@ -14,29 +14,35 @@ import type { IScannedBuiltinExtension } from 'vs/workbench/services/extensionMa
  * @param options The options that should be used to initialize vscode.
  */
 export async function init(options: InitVscodeOptions): Promise<IDisposable> {
-	await initLoader();
+	if (!options.container) {
+		throw new Error('A container must be provided.');
+	}
+	await initLoader(options.container);
 	return await initWorkbench(options);
 }
 
 let loaded = false;
 
-async function initLoader() {
+async function initLoader(container: HTMLElement) {
 	if (!loaded) {
 		loaded = true;
 		await Promise.all([
-			injectScript(`${originPath}/loader.js`),
-			injectScript(`${vscodePath}/vs/workbench/workbench.web.api.js`),
+			injectScript(container, `${originPath}/loader.js`),
+			injectScript(
+				container,
+				`${vscodePath}/vs/workbench/workbench.web.api.js`
+			),
 		]);
 	}
 }
 
-async function injectScript(script: string) {
+async function injectScript(container: HTMLElement, script: string) {
 	return new Promise((resolve, reject) => {
 		const loaderScript = document.createElement('script');
 		loaderScript.src = script;
 		loaderScript.onload = () => resolve();
 		loaderScript.onerror = (err: any) => reject(err);
-		document.body.appendChild(loaderScript);
+		container.appendChild(loaderScript);
 	});
 }
 
