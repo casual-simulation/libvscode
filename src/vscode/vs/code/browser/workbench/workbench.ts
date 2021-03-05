@@ -521,7 +521,9 @@ export function init(
 	config: IWorkbenchConstructionOptions & {
 		folderUri?: UriComponents;
 		workspaceUri?: UriComponents;
-	}, builtinExtensions: IScannedBuiltinExtension[] = []): IDisposable {
+	},
+	builtinExtensions: IScannedBuiltinExtension[] = []
+): IDisposable {
 	if (!config) {
 		throw new Error('Missing web configuration');
 	}

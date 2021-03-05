@@ -3,7 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { IBuiltinExtensionsScannerService, IScannedExtension, ExtensionType, IExtensionManifest } from 'vs/platform/extensions/common/extensions';
+import {
+	IBuiltinExtensionsScannerService,
+	IScannedExtension,
+	ExtensionType,
+	IExtensionManifest,
+} from 'vs/platform/extensions/common/extensions';
 import { isWeb } from 'vs/base/common/platform';
 import { IWorkbenchEnvironmentService } from 'vs/workbench/services/environment/common/environmentService';
 import { IUriIdentityService } from 'vs/workbench/services/uriIdentity/common/uriIdentity';
@@ -20,48 +25,81 @@ export interface IScannedBuiltinExtension {
 	changelogPath?: string;
 }
 
-export class BuiltinExtensionsScannerService implements IBuiltinExtensionsScannerService {
-
+export class BuiltinExtensionsScannerService
+	implements IBuiltinExtensionsScannerService {
 	declare readonly _serviceBrand: undefined;
 
 	private readonly builtinExtensions: IScannedExtension[] = [];
 
 	constructor(
-		@IWorkbenchEnvironmentService environmentService: IWorkbenchEnvironmentService,
-		@IUriIdentityService uriIdentityService: IUriIdentityService,
+		@IWorkbenchEnvironmentService
+		environmentService: IWorkbenchEnvironmentService,
+		@IUriIdentityService uriIdentityService: IUriIdentityService
 	) {
 		if (isWeb) {
-			const builtinExtensionsServiceUrl = this._getBuiltinExtensionsUrl(environmentService);
+			const builtinExtensionsServiceUrl = this._getBuiltinExtensionsUrl(
+				environmentService
+			);
 			if (builtinExtensionsServiceUrl) {
 				let scannedBuiltinExtensions: IScannedBuiltinExtension[] = [];
 
 				if (environmentService.isBuilt) {
 					// Built time configuration (do NOT modify)
-					scannedBuiltinExtensions = [/*BUILD->INSERT_BUILTIN_EXTENSIONS*/];
+					scannedBuiltinExtensions = [
+						/*BUILD->INSERT_BUILTIN_EXTENSIONS*/
+					];
 				} else {
 					// Find builtin extensions by checking globals
-					scannedBuiltinExtensions = (<any>globalThis).vscode?.builtinExtensions ?? scannedBuiltinExtensions;
+					scannedBuiltinExtensions =
+						(<any>globalThis).vscode?.builtinExtensions ??
+						scannedBuiltinExtensions;
 				}
 
-				this.builtinExtensions = scannedBuiltinExtensions.map(e => ({
-					identifier: { id: getGalleryExtensionId(e.packageJSON.publisher, e.packageJSON.name) },
-					location: uriIdentityService.extUri.joinPath(builtinExtensionsServiceUrl!, e.extensionPath),
+				this.builtinExtensions = scannedBuiltinExtensions.map((e) => ({
+					identifier: {
+						id: getGalleryExtensionId(
+							e.packageJSON.publisher,
+							e.packageJSON.name
+						),
+					},
+					location: uriIdentityService.extUri.joinPath(
+						builtinExtensionsServiceUrl!,
+						e.extensionPath
+					),
 					type: ExtensionType.System,
 					packageJSON: e.packageJSON,
 					packageNLS: e.packageNLS,
-					readmeUrl: e.readmePath ? uriIdentityService.extUri.joinPath(builtinExtensionsServiceUrl!, e.readmePath) : undefined,
-					changelogUrl: e.changelogPath ? uriIdentityService.extUri.joinPath(builtinExtensionsServiceUrl!, e.changelogPath) : undefined,
+					readmeUrl: e.readmePath
+						? uriIdentityService.extUri.joinPath(
+								builtinExtensionsServiceUrl!,
+								e.readmePath
+						  )
+						: undefined,
+					changelogUrl: e.changelogPath
+						? uriIdentityService.extUri.joinPath(
+								builtinExtensionsServiceUrl!,
+								e.changelogPath
+						  )
+						: undefined,
 				}));
 			}
 		}
 	}
 
-	private _getBuiltinExtensionsUrl(environmentService: IWorkbenchEnvironmentService): URI | undefined {
+	private _getBuiltinExtensionsUrl(
+		environmentService: IWorkbenchEnvironmentService
+	): URI | undefined {
 		let enableBuiltinExtensions: boolean;
-		if (environmentService.options && typeof environmentService.options._enableBuiltinExtensions !== 'undefined') {
-			enableBuiltinExtensions = environmentService.options._enableBuiltinExtensions;
+		if (
+			environmentService.options &&
+			typeof environmentService.options._enableBuiltinExtensions !== 'undefined'
+		) {
+			enableBuiltinExtensions =
+				environmentService.options._enableBuiltinExtensions;
 		} else {
-			enableBuiltinExtensions = environmentService.remoteAuthority ? false : true;
+			enableBuiltinExtensions = environmentService.remoteAuthority
+				? false
+				: true;
 		}
 		if (enableBuiltinExtensions) {
 			return getUriFromAmdModule(require, '../../../../../../extensions');
@@ -77,4 +115,7 @@ export class BuiltinExtensionsScannerService implements IBuiltinExtensionsScanne
 	}
 }
 
-registerSingleton(IBuiltinExtensionsScannerService, BuiltinExtensionsScannerService);
+registerSingleton(
+	IBuiltinExtensionsScannerService,
+	BuiltinExtensionsScannerService
+);

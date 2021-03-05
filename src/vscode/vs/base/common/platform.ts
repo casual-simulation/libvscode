@@ -21,7 +21,7 @@ let _userAgent: string | undefined = undefined;
 
 interface NLSConfig {
 	locale: string;
-	availableLanguages: { [key: string]: string; };
+	availableLanguages: { [key: string]: string };
 	_translationsConfigFile: string;
 }
 
@@ -51,7 +51,12 @@ interface INavigator {
 declare const navigator: INavigator;
 declare const self: any;
 
-const _globals = (typeof self === 'object' ? self : typeof global === 'object' ? global : {} as any);
+const _globals =
+	typeof self === 'object'
+		? self
+		: typeof global === 'object'
+		? global
+		: ({} as any);
 
 let nodeProcess: INodeProcess | undefined = undefined;
 if (typeof process !== 'undefined') {
@@ -62,7 +67,9 @@ if (typeof process !== 'undefined') {
 	nodeProcess = _globals.vscode.process;
 }
 
-const isElectronRenderer = typeof nodeProcess?.versions?.electron === 'string' && nodeProcess.type === 'renderer';
+const isElectronRenderer =
+	typeof nodeProcess?.versions?.electron === 'string' &&
+	nodeProcess.type === 'renderer';
 export const isElectronSandboxed = isElectronRenderer && nodeProcess?.sandboxed;
 
 // Web environment
@@ -70,7 +77,12 @@ if (typeof navigator === 'object' && !isElectronRenderer) {
 	_userAgent = navigator.userAgent;
 	_isWindows = _userAgent.indexOf('Windows') >= 0;
 	_isMacintosh = _userAgent.indexOf('Macintosh') >= 0;
-	_isIOS = (_userAgent.indexOf('Macintosh') >= 0 || _userAgent.indexOf('iPad') >= 0 || _userAgent.indexOf('iPhone') >= 0) && !!navigator.maxTouchPoints && navigator.maxTouchPoints > 0;
+	_isIOS =
+		(_userAgent.indexOf('Macintosh') >= 0 ||
+			_userAgent.indexOf('iPad') >= 0 ||
+			_userAgent.indexOf('iPhone') >= 0) &&
+		!!navigator.maxTouchPoints &&
+		navigator.maxTouchPoints > 0;
 	_isLinux = _userAgent.indexOf('Linux') >= 0;
 	_isWeb = true;
 	// below codes are changed by github1s
@@ -84,9 +96,9 @@ if (typeof navigator === 'object' && !isElectronRenderer) {
 
 // Native environment
 else if (typeof nodeProcess === 'object') {
-	_isWindows = (nodeProcess.platform === 'win32');
-	_isMacintosh = (nodeProcess.platform === 'darwin');
-	_isLinux = (nodeProcess.platform === 'linux');
+	_isWindows = nodeProcess.platform === 'win32';
+	_isMacintosh = nodeProcess.platform === 'darwin';
+	_isLinux = nodeProcess.platform === 'linux';
 	_locale = LANGUAGE_DEFAULT;
 	_language = LANGUAGE_DEFAULT;
 	const rawNlsConfig = nodeProcess.env['VSCODE_NLS_CONFIG'];
@@ -98,8 +110,7 @@ else if (typeof nodeProcess === 'object') {
 			// VSCode's default language is 'en'
 			_language = resolved ? resolved : LANGUAGE_DEFAULT;
 			_translationsConfigFile = nlsConfig._translationsConfigFile;
-		} catch (e) {
-		}
+		} catch (e) {}
 	}
 	_isNative = true;
 }
@@ -113,14 +124,18 @@ export const enum Platform {
 	Web,
 	Mac,
 	Linux,
-	Windows
+	Windows,
 }
 export function PlatformToString(platform: Platform) {
 	switch (platform) {
-		case Platform.Web: return 'Web';
-		case Platform.Mac: return 'Mac';
-		case Platform.Linux: return 'Linux';
-		case Platform.Windows: return 'Windows';
+		case Platform.Web:
+			return 'Web';
+		case Platform.Mac:
+			return 'Mac';
+		case Platform.Linux:
+			return 'Linux';
+		case Platform.Windows:
+			return 'Windows';
 	}
 }
 
@@ -151,7 +166,6 @@ export const userAgent = _userAgent;
 export const language = _language;
 
 export namespace Language {
-
 	export function value(): string {
 		return language;
 	}
@@ -216,7 +230,7 @@ export const setImmediate: ISetImmediate = (function defineSetImmediate() {
 			const myId = ++lastId;
 			pending.push({
 				id: myId,
-				callback: callback
+				callback: callback,
 			});
 			globals.postMessage({ vscodeSetImmediateId: myId }, '*');
 		};
@@ -231,9 +245,14 @@ export const setImmediate: ISetImmediate = (function defineSetImmediate() {
 export const enum OperatingSystem {
 	Windows = 1,
 	Macintosh = 2,
-	Linux = 3
+	Linux = 3,
 }
-export const OS = (_isMacintosh || _isIOS ? OperatingSystem.Macintosh : (_isWindows ? OperatingSystem.Windows : OperatingSystem.Linux));
+export const OS =
+	_isMacintosh || _isIOS
+		? OperatingSystem.Macintosh
+		: _isWindows
+		? OperatingSystem.Windows
+		: OperatingSystem.Linux;
 
 let _isLittleEndian = true;
 let _isLittleEndianComputed = false;
@@ -244,7 +263,7 @@ export function isLittleEndian(): boolean {
 		test[0] = 1;
 		test[1] = 2;
 		const view = new Uint16Array(test.buffer);
-		_isLittleEndian = (view[0] === (2 << 8) + 1);
+		_isLittleEndian = view[0] === (2 << 8) + 1;
 	}
 	return _isLittleEndian;
 }
