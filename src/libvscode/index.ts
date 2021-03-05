@@ -51,9 +51,7 @@ export async function fetchBuiltinExtensions(
     const extensionsPath = buildOriginPath(publicPath, vscodeVersionHash);
     let builtinExtensions: IScannedBuiltinExtension[] = JSON.parse(
         await (
-            await fetch(
-                `${extensionsPath}/configure/extensions.json`
-            )
+            await fetch(`${extensionsPath}/configure/extensions.json`)
         ).text()
     );
     return builtinExtensions;
@@ -64,7 +62,10 @@ let loaded = false;
 async function initLoader(options: InitVscodeOptions) {
     if (!loaded) {
         loaded = true;
-        const originPath = buildOriginPath(options.publicPath, options.vscodeVersionHash!);
+        const originPath = buildOriginPath(
+            options.publicPath,
+            options.vscodeVersionHash!
+        );
         const vscodePath = buildVscodePath(originPath);
         (<any>globalThis).VSCODE_ORIGIN_PATH = originPath;
         (<any>globalThis).VSCODE_PUBLIC_PATH = vscodePath;
@@ -114,7 +115,10 @@ async function initWorkbench(options: InitVscodeOptions) {
         );
     }
 
-    const originPath = buildOriginPath(options.publicPath, options.vscodeVersionHash!);
+    const originPath = buildOriginPath(
+        options.publicPath,
+        options.vscodeVersionHash!
+    );
     const vscodePath = buildVscodePath(originPath);
 
     return workbench.init(
@@ -128,8 +132,7 @@ async function initWorkbench(options: InitVscodeOptions) {
     );
 }
 
-function buildOriginPath(publicPath: string,
-    vscodeVersionHash: string) {
+function buildOriginPath(publicPath: string, vscodeVersionHash: string) {
     let path = globalThis.location.origin + publicPath;
     if (!publicPath.endsWith('/')) {
         path += '/';

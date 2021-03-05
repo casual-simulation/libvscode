@@ -33,7 +33,8 @@ jobs:
                   key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}-${{ matrix.node-version }}
                   restore-keys: |
                       ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}-${{ matrix.node-version }}
-
+            - run: ./scripts/pre-install.sh
             - run: yarn --frozen-lockfile
+            - run: ./scripts/postinstall.sh
             - run: yarn eslint
             - run: yarn build
