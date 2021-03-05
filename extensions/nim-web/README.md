@@ -17,4 +17,4 @@ Open-VSX:
 
 This extension adds language support for the Nim language to VS Code, including:
 
-- Syntax Highlight (nim, nimble, nim.cfg)
+-   Syntax Highlight (nim, nimble, nim.cfg)

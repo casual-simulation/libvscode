@@ -63,10 +63,10 @@ Put simply, we build the necessary code and do a minify. The minify script is mo
 
 ## Directory Structure
 
-- `extensions` - custom VS Code extensions that don't come with VS Code natively.
+-   `extensions` - custom VS Code extensions that don't come with VS Code natively.
 
-- `src` - the code in here will be patched into VS Code source.
+-   `src` - the code in here will be patched into VS Code source.
 
-- `scripts` - some scripts for build, watch, package, etc.
+-   `scripts` - some scripts for build, watch, package, etc.
 
-- `resources` - some resource files such as templates, pictures, configuration files, etc.
+-   `resources` - some resource files such as templates, pictures, configuration files, etc.

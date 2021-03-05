@@ -6,18 +6,18 @@ APP_ROOT=$(pwd)
 
 # execute all necessary tasks
 function main() {
-	cd "${APP_ROOT}/scripts"
-	./package/copy-resources.sh
-	./package/copy-node_modules.sh
-	./package/copy-extensions.sh
-	node ./package/generate-config.js
+    cd "${APP_ROOT}/scripts"
+    ./package/copy-resources.sh
+    ./package/copy-node_modules.sh
+    ./package/copy-extensions.sh
+    node ./package/generate-config.js
 
-	echo 'please waiting...'
-	while [ ! -e "${APP_ROOT}/lib/vscode/out" ]
-	do
-		echo "waiting for vscode build..."
-		sleep 3
-	done
+    echo 'please waiting...'
+    while [ ! -e "${APP_ROOT}/lib/vscode/out" ]
+    do
+        echo "waiting for vscode build..."
+        sleep 3
+    done
 }
 
 main "$@"

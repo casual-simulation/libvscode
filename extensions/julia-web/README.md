@@ -14,14 +14,14 @@ This [VS Code](https://code.visualstudio.com) extension provides support for the
 2. Install VS Code for your platform: https://code.visualstudio.com/download
    At the end of this step you should be able to start VS Code.
 3. Install the Julia VS Code extension:
-   1. Start VS Code.
-   2. Inside VS Code, go to the extensions view either by
-      executing the `View: Show Extensions` command (click View->Command Palette...)
-      or by clicking on the extension icon on the left side of the VS Code
-      window.
-   3. In the extensions view, simply search for the term `julia` in the marketplace
-      search box, then select the extension named `Julia` and click the install button.
-      You might have to restart VS Code after this step.
+    1. Start VS Code.
+    2. Inside VS Code, go to the extensions view either by
+       executing the `View: Show Extensions` command (click View->Command Palette...)
+       or by clicking on the extension icon on the left side of the VS Code
+       window.
+    3. In the extensions view, simply search for the term `julia` in the marketplace
+       search box, then select the extension named `Julia` and click the install button.
+       You might have to restart VS Code after this step.
 
 ### Configure the Julia extension
 
@@ -46,19 +46,19 @@ in JSON, so you need to use `\\` as the path separator character on Windows.
 
 The extension currently provides:
 
-- syntax highlighting
-- [snippets: latex and user-shared snippets](https://github.com/julia-vscode/julia-vscode/wiki/Snippets)
-- [Julia specific commands](https://github.com/julia-vscode/julia-vscode/wiki/Commands)
-- [integrated Julia REPL](https://github.com/julia-vscode/julia-vscode/wiki/REPL)
-- [code completion](https://github.com/julia-vscode/julia-vscode/wiki/IntelliSense)
-- [hover help](https://github.com/julia-vscode/julia-vscode/wiki/Information#hover-help)
-- [a linter](https://github.com/julia-vscode/julia-vscode/wiki/Information#linter)
-- [code navigation](https://github.com/julia-vscode/julia-vscode/wiki/Navigation)
-- tasks for running tests, builds, benchmarks and build documentation
-- a debugger
-- a plot gallery
-- a grid viewer for tabular data
-- integrated support for Weave.jl
+-   syntax highlighting
+-   [snippets: latex and user-shared snippets](https://github.com/julia-vscode/julia-vscode/wiki/Snippets)
+-   [Julia specific commands](https://github.com/julia-vscode/julia-vscode/wiki/Commands)
+-   [integrated Julia REPL](https://github.com/julia-vscode/julia-vscode/wiki/REPL)
+-   [code completion](https://github.com/julia-vscode/julia-vscode/wiki/IntelliSense)
+-   [hover help](https://github.com/julia-vscode/julia-vscode/wiki/Information#hover-help)
+-   [a linter](https://github.com/julia-vscode/julia-vscode/wiki/Information#linter)
+-   [code navigation](https://github.com/julia-vscode/julia-vscode/wiki/Navigation)
+-   tasks for running tests, builds, benchmarks and build documentation
+-   a debugger
+-   a plot gallery
+-   a grid viewer for tabular data
+-   integrated support for Weave.jl
 
 ## Documentation
 

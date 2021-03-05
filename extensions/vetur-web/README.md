@@ -24,9 +24,9 @@
 
 Vue tooling for VS Code.
 
-- [vls](./server): Vue Language Server
-- [vti](./vti): Vetur Terminal Interface
-- [Docs](https://vuejs.github.io/vetur)
+-   [vls](./server): Vue Language Server
+-   [vti](./vti): Vetur Terminal Interface
+-   [Docs](https://vuejs.github.io/vetur)
 
 🎉 VueConf 2017 [Slide](https://www.dropbox.com/sh/eb4w8k3orh0j391/AAB3HaJexbGLa2tCP14BI8oJa?dl=0) & [Video](https://www.youtube.com/watch?v=05tNXJ-Kric) 🎉
 
@@ -56,24 +56,24 @@ Thanks to the following companies for supporting Vetur's development:
 
 ## Features
 
-- [Syntax-highlighting](https://vuejs.github.io/vetur/guide/highlighting.html)
-- [Snippet](https://vuejs.github.io/vetur/guide/snippet.html)
-- [Emmet](https://vuejs.github.io/vetur/guide/emmet.html)
-- [Linting / Error Checking](https://vuejs.github.io/vetur/guide/linting-error.html)
-- [Formatting](https://vuejs.github.io/vetur/guide/formatting.html)
-- [IntelliSense](https://vuejs.github.io/vetur/guide/intellisense.html)
-- [Debugging](https://vuejs.github.io/vetur/guide/debugging.html)
-- [Component Data](https://vuejs.github.io/vetur/guide/framework.html): auto-completion and hover-information for popular Vue frameworks and your own custom components
-- [Experimental Interpolation Features](https://vuejs.github.io/vetur/guide/interpolation.html): auto-completion, hover information and type-checking in Vue template
-- [VTI](https://vuejs.github.io/vetur/guide/vti.html): Surface template type-checking errors on CLI
-- [Global components](https://vuejs.github.io/vetur/guide/global-components.html): support define global components.
+-   [Syntax-highlighting](https://vuejs.github.io/vetur/guide/highlighting.html)
+-   [Snippet](https://vuejs.github.io/vetur/guide/snippet.html)
+-   [Emmet](https://vuejs.github.io/vetur/guide/emmet.html)
+-   [Linting / Error Checking](https://vuejs.github.io/vetur/guide/linting-error.html)
+-   [Formatting](https://vuejs.github.io/vetur/guide/formatting.html)
+-   [IntelliSense](https://vuejs.github.io/vetur/guide/intellisense.html)
+-   [Debugging](https://vuejs.github.io/vetur/guide/debugging.html)
+-   [Component Data](https://vuejs.github.io/vetur/guide/framework.html): auto-completion and hover-information for popular Vue frameworks and your own custom components
+-   [Experimental Interpolation Features](https://vuejs.github.io/vetur/guide/interpolation.html): auto-completion, hover information and type-checking in Vue template
+-   [VTI](https://vuejs.github.io/vetur/guide/vti.html): Surface template type-checking errors on CLI
+-   [Global components](https://vuejs.github.io/vetur/guide/global-components.html): support define global components.
 
 ## Quick Start
 
-- Install [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur).
-- Try it with [Veturpack](https://github.com/octref/veturpack).
-- Refer to [setup](https://vuejs.github.io/vetur/guide/setup.html) page for setting up.
-- Refer to each feature's own page for setting up specific features.
+-   Install [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur).
+-   Try it with [Veturpack](https://github.com/octref/veturpack).
+-   Refer to [setup](https://vuejs.github.io/vetur/guide/setup.html) page for setting up.
+-   Refer to each feature's own page for setting up specific features.
 
 ## FAQ
 
@@ -81,8 +81,8 @@ Thanks to the following companies for supporting Vetur's development:
 
 ## Limitations
 
-- You can restart Vue language service when Vetur slow ([#2192](https://github.com/vuejs/vetur/issues/2192))
-- yarn pnp (https://vuejs.github.io/vetur/guide/setup.html#yarn-pnp)
+-   You can restart Vue language service when Vetur slow ([#2192](https://github.com/vuejs/vetur/issues/2192))
+-   yarn pnp (https://vuejs.github.io/vetur/guide/setup.html#yarn-pnp)
 
 ## Roadmap
 

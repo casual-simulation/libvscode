@@ -17,8 +17,8 @@ An extension for supercharging your Data Science workflow by previewing Jupyter 
 
 ## Quick Start
 
-- Install the extension
-- Open a Jupyter Notebook
-- Click Show Preview menu button from Editor/Title Menu
+-   Install the extension
+-   Open a Jupyter Notebook
+-   Click Show Preview menu button from Editor/Title Menu
 
 > ![nbpreviewer quick start](https://thumbs.gfycat.com/ImaginativeCooperativeDogwoodtwigborer-max-14mb.gif)

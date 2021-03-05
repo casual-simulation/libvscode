@@ -20,19 +20,19 @@ This repo also powers the Scala syntax highlighting on GitHub. (It is vendored i
 
 The current maintainers (people who can merge pull requests) are:
 
-- Nicolas Stucki- [`@nicolasstucki`](https://github.com/nicolasstucki)
-- Maxime Kjaer - [`@MaximeKjaer`](https://github.com/MaximeKjaer)
-- Olafur Pall Geirsson - [`@olafurpg`](https://github.com/olafurpg)
-- Vitalii Voloshyn - [`@PanAeon`](https://github.com/PanAeon)
-- all other members of the Scala organization on GitHub
+-   Nicolas Stucki- [`@nicolasstucki`](https://github.com/nicolasstucki)
+-   Maxime Kjaer - [`@MaximeKjaer`](https://github.com/MaximeKjaer)
+-   Olafur Pall Geirsson - [`@olafurpg`](https://github.com/olafurpg)
+-   Vitalii Voloshyn - [`@PanAeon`](https://github.com/PanAeon)
+-   all other members of the Scala organization on GitHub
 
 ## Based on
 
-- Plugin: https://github.com/daltonjorge/vscode-scala
-- Template: https://github.com/sellmerfud/scala.tmbundle
-  (https://github.com/mads-hartmann/scala.tmbundle)
-- Textmate JSON schema:
-  https://github.com/Septh/tmlanguage/blob/master/tmLanguage.schema.json
+-   Plugin: https://github.com/daltonjorge/vscode-scala
+-   Template: https://github.com/sellmerfud/scala.tmbundle
+    (https://github.com/mads-hartmann/scala.tmbundle)
+-   Textmate JSON schema:
+    https://github.com/Septh/tmlanguage/blob/master/tmLanguage.schema.json
 
 ## License
 

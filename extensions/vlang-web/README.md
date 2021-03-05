@@ -10,28 +10,28 @@ Provides [V language](https://vlang.io) support for Visual Studio Code.
 
 ## Table of Contents
 
-- [Preview](#preview)
-- [Features](#features)
-  - [Code Editing](#code-editing)
-  - [Testing](#testing)
-  - [Others](#others)
+-   [Preview](#preview)
+-   [Features](#features)
+    -   [Code Editing](#code-editing)
+    -   [Testing](#testing)
+    -   [Others](#others)
 
 ## Features
 
 ### Code Editing
 
-- Code Snippets for quick coding.
-- Format code on file save as well as format manually (using `v fmt`).
-- Linter (Workspace files only).
+-   Code Snippets for quick coding.
+-   Format code on file save as well as format manually (using `v fmt`).
+-   Linter (Workspace files only).
 
 ### Testing
 
-- Run Tests under the cursor, in current file, in current package, in the whole workspace using either commands or codelens.
+-   Run Tests under the cursor, in current file, in current package, in the whole workspace using either commands or codelens.
 
 ### Others
 
-- Upload to the V Playground.
-- Upload to the DevBits V Playground.
+-   Upload to the V Playground.
+-   Upload to the DevBits V Playground.
 
 ## Usage
 
@@ -41,13 +41,13 @@ _Note_: It is recommended to turn `Auto Save` on in Visual Studio Code (`File ->
 
 ## Commands
 
-- `V: Run current file`
-- `V: Build an optimized executable from current file`
-- `V: Show help info`
-- `V: Show V version`
-- `V: Test current file`
-- `V: Test current package`
-- `V: Upload and share current code to V playground`
+-   `V: Run current file`
+-   `V: Build an optimized executable from current file`
+-   `V: Show help info`
+-   `V: Show V version`
+-   `V: Test current file`
+-   `V: Test current package`
+-   `V: Upload and share current code to V playground`
 
 You can access all of the above commands from the command palette (Cmd+Shift+P or Ctrl+Shift+P).
 

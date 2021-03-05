@@ -7,15 +7,15 @@ export IS_BUILD="true"
 
 # execute all necessary tasks
 function main() {
-	rm -rf "${APP_ROOT}/dist"
-	cd "${APP_ROOT}/scripts"
-	./build/sync-code.sh
-	./build/build-vscode.sh
-	./build/build-github1s-extensions.sh
-	node ./build/build-entry.js
-	./package.sh
+    rm -rf "${APP_ROOT}/dist"
+    cd "${APP_ROOT}/scripts"
+    ./build/sync-code.sh
+    ./build/build-vscode.sh
+    ./build/build-github1s-extensions.sh
+    node ./build/build-entry.js
+    ./package.sh
 
-	echo "all build done!"
+    echo "all build done!"
 }
 
 main "$@"

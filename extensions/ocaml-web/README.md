@@ -48,12 +48,12 @@ npm install esy --global
 
 ```json
 {
-	"dependencies": {
-		"@opam/ocaml-lsp-server": "*",
-		"@opam/ocamlfind-secondary": "*",
-		"@opam/reason": "*",
-		"ocaml": "4.6.x"
-	}
+    "dependencies": {
+        "@opam/ocaml-lsp-server": "*",
+        "@opam/ocamlfind-secondary": "*",
+        "@opam/reason": "*",
+        "ocaml": "4.6.x"
+    }
 }
 ```
 
@@ -65,28 +65,28 @@ esy
 
 ## Features
 
-- Syntax highlighting
-  - ATD
-  - Cram tests
-  - Dune
-  - Menhir
-  - Merlin
-  - META
-  - OASIS
-  - OCaml
-  - OCamlbuild
-  - OCamlFormat
-  - OCamllex
-  - opam
-  - ReasonML
-  - Eliom
-- Indentation rules
-- Snippets
-  - Dune
-  - OCaml
-  - OCamllex
-- Task Provider
-  - Dune
+-   Syntax highlighting
+    -   ATD
+    -   Cram tests
+    -   Dune
+    -   Menhir
+    -   Merlin
+    -   META
+    -   OASIS
+    -   OCaml
+    -   OCamlbuild
+    -   OCamlFormat
+    -   OCamllex
+    -   opam
+    -   ReasonML
+    -   Eliom
+-   Indentation rules
+-   Snippets
+    -   Dune
+    -   OCaml
+    -   OCamllex
+-   Task Provider
+    -   Dune
 
 ## Configuration
 
@@ -125,4 +125,4 @@ MacOS).
 
 ## Requirements
 
-- [ocaml/ocaml-lsp](https://github.com/ocaml/ocaml-lsp)
+-   [ocaml/ocaml-lsp](https://github.com/ocaml/ocaml-lsp)

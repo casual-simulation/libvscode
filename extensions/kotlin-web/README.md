@@ -15,9 +15,9 @@ This extension adds basic features to help make writing Kotlin much more pleasan
 
 ## Features
 
-- Syntax highlighting
-- Code snippets
-- Region code folding
+-   Syntax highlighting
+-   Code snippets
+-   Region code folding
 
 ## Installation
 
@@ -41,7 +41,7 @@ We welcome any contributions to help make the extension better. There are severa
 
 ## Credits
 
-- [Visual Studio Code](https://code.visualstudio.com/)
-- [vscode-docs on GitHub](https://github.com/Microsoft/vscode-docs)
-- [Kotlin.org](https://kotlinlang.org/)
-- [Sublime Text - Kotlin Package](https://github.com/vkostyukov/kotlin-sublime-package)
+-   [Visual Studio Code](https://code.visualstudio.com/)
+-   [vscode-docs on GitHub](https://github.com/Microsoft/vscode-docs)
+-   [Kotlin.org](https://kotlinlang.org/)
+-   [Sublime Text - Kotlin Package](https://github.com/vkostyukov/kotlin-sublime-package)
