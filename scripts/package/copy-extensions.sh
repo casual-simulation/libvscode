@@ -17,7 +17,7 @@ function main() {
     ensureBuiltinExtensitions
     cd ${APP_ROOT}
     mkdir -p dist/static/extensions
-    node scripts/package/copy-extensions.js
+    node scripts/package/copy-extensions.cjs
 
     echo "copy vscode builtin extensions done!"
 }

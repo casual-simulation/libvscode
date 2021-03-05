@@ -6,6 +6,11 @@ import type {
 import type { IScannedBuiltinExtension } from 'vs/workbench/services/extensionManagement/browser/builtinExtensionsScannerService';
 
 /**
+ * The default VSCode version hash that is injected into this file by the build process.
+ */
+declare var VSCODE_VERSION_HASH: string;
+
+/**
  * Initializes VSCode with the given options.
  * @param options The options that should be used to initialize vscode.
  */
@@ -18,6 +23,9 @@ export async function initVSCode(
     if (!options.publicPath) {
         throw new Error('A public path must be provided');
     }
+    if (!options.vscodeVersionHash) {
+        options.vscodeVersionHash = VSCODE_VERSION_HASH;
+    }
     (<any>globalThis).VSCODE_PUBLIC_PATH = options.publicPath;
     await initLoader(options);
     return await initWorkbench(options);
@@ -28,7 +36,7 @@ let loaded = false;
 async function initLoader(options: InitVscodeOptions) {
     if (!loaded) {
         loaded = true;
-        const originPath = `${globalThis.location.origin}${options.publicPath}`;
+        const originPath = `${globalThis.location.origin}${options.publicPath}/${options.vscodeVersionHash}`;
         const vscodePath = `${originPath}/vscode`;
         await Promise.all([
             injectScript(options.container, `${originPath}/loader.js`),
@@ -77,7 +85,7 @@ async function initWorkbench(options: InitVscodeOptions) {
         );
     }
 
-    const originPath = `${globalThis.location.origin}${options.publicPath}`;
+    const originPath = `${globalThis.location.origin}${options.publicPath}/${options.vscodeVersionHash}`;
     const vscodePath = `${originPath}/vscode`;
 
     return workbench.init(
@@ -89,6 +97,16 @@ async function initWorkbench(options: InitVscodeOptions) {
         },
         builtinExtensions
     );
+}
+
+export enum LogLevel {
+    Trace,
+    Debug,
+    Info,
+    Warning,
+    Error,
+    Critical,
+    Off
 }
 
 /**
@@ -104,6 +122,11 @@ export interface InitVscodeOptions {
      * The path that the VSCode scripts & assets are available at.
      */
     publicPath: string;
+
+    /**
+     * The hash that is used for the static folder that vscode is loaded from.
+     */
+    vscodeVersionHash?: string;
 
     /**
      * The settings used to initialize the vscode workbench.

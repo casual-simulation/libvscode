@@ -11,9 +11,11 @@ function main() {
     cd "${APP_ROOT}/scripts"
     ./build/sync-code.sh
     ./build/build-vscode.sh
-    ./build/build-github1s-extensions.sh
-    node ./build/build-entry.js
+    ./build/build-extensions.sh
     ./package.sh
+    ./hash.sh
+
+    node ./build/build-entry.cjs
 
     echo "all build done!"
 }

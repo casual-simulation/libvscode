@@ -10,7 +10,7 @@ function main() {
     ./package/copy-extensions.sh
     ./package/copy-node_modules.sh
     ./package/copy-resources.sh
-    node ./package/generate-config.js
+    node ./package/generate-config.cjs
 
     echo "all copy done!"
 }
