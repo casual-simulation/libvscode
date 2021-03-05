@@ -373,36 +373,6 @@ export class ExplorerView extends ViewPane {
         this.dragHandler = new DelayedDragHandler(container, () =>
             this.setExpanded(true)
         );
-
-        const titleElement = container.querySelector('.title') as HTMLElement;
-        const setHeader = () => {
-            const workspace = this.contextService.getWorkspace();
-            const title = workspace.folders.map((folder) => folder.name).join();
-            // modify by github1s, set file explorer title with `${route.owner}/${route.repo}`
-            const currentFolderUri = workspace.folders?.[0].uri;
-            const textContent =
-                currentFolderUri && currentFolderUri.scheme === 'github1s'
-                    ? URI.parse(window.location.href)
-                          .path.split('/')
-                          .filter(Boolean)
-                          .slice(0, 2)
-                          .join('/') || 'conwnet/github1s'
-                    : this.name;
-            titleElement.textContent = textContent;
-            titleElement.title = title;
-            titleElement.setAttribute(
-                'aria-label',
-                nls.localize(
-                    'explorerSection',
-                    'Explorer Section: {0}',
-                    this.name
-                )
-            );
-        };
-
-        this._register(this.contextService.onDidChangeWorkspaceName(setHeader));
-        this._register(this.labelService.onDidChangeFormatters(setHeader));
-        setHeader();
     }
 
     protected layoutBody(height: number, width: number): void {
