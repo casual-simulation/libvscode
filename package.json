@@ -1,6 +1,6 @@
 {
     "name": "@casual-simulation/libvscode",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "VSCode packaged into a ESM library",
     "main": "dist/index.js",
     "module": "dist/index.js",
@@ -35,8 +35,6 @@
         "esbuild-plugin-alias": "0.1.2"
     },
     "scripts": {
-        "preinstall": "./scripts/pre-install.sh",
-        "postinstall": "husky install && ./scripts/postinstall.sh",
         "clean-build": "./scripts/clean-build.sh",
         "clean": "./scripts/clean.sh",
         "build": "./scripts/build.sh",
