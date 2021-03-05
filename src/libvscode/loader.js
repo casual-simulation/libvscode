@@ -1,8 +1,7 @@
 {
     globalThis.MonacoPerformanceMarks = globalThis.MonacoPerformanceMarks || [];
-    const publicPath = globalThis.VSCODE_PUBLIC_PATH ?? `/static`;
-    const originPath = `${globalThis.location.origin}${publicPath}`;
-    const vscodePath = `${originPath}/vscode`;
+    const originPath = globalThis.VSCODE_ORIGIN_PATH;
+    const vscodePath = globalThis.VSCODE_PUBLIC_PATH;
 
     globalThis.require = {
         baseUrl: vscodePath,

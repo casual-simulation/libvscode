@@ -48,10 +48,11 @@ export async function fetchBuiltinExtensions(
     vscodeVersionHash: string = VSCODE_VERSION_HASH
 ): Promise<IScannedBuiltinExtension[]> {
     console.log('Fetching builtin extensions from extensions.json');
+    const extensionsPath = buildOriginPath(publicPath, vscodeVersionHash);
     let builtinExtensions: IScannedBuiltinExtension[] = JSON.parse(
         await (
             await fetch(
-                `${publicPath}/${vscodeVersionHash}/configure/extensions.json`
+                `${extensionsPath}/configure/extensions.json`
             )
         ).text()
     );
@@ -63,8 +64,10 @@ let loaded = false;
 async function initLoader(options: InitVscodeOptions) {
     if (!loaded) {
         loaded = true;
-        const originPath = `${globalThis.location.origin}${options.publicPath}/${options.vscodeVersionHash}`;
-        const vscodePath = `${originPath}/vscode`;
+        const originPath = buildOriginPath(options.publicPath, options.vscodeVersionHash!);
+        const vscodePath = buildVscodePath(originPath);
+        (<any>globalThis).VSCODE_ORIGIN_PATH = originPath;
+        (<any>globalThis).VSCODE_PUBLIC_PATH = vscodePath;
         await Promise.all([
             injectScript(options.container, `${originPath}/loader.js`),
             injectScript(
@@ -111,8 +114,8 @@ async function initWorkbench(options: InitVscodeOptions) {
         );
     }
 
-    const originPath = `${globalThis.location.origin}${options.publicPath}/${options.vscodeVersionHash}`;
-    const vscodePath = `${originPath}/vscode`;
+    const originPath = buildOriginPath(options.publicPath, options.vscodeVersionHash!);
+    const vscodePath = buildVscodePath(originPath);
 
     return workbench.init(
         options.container,
@@ -123,6 +126,24 @@ async function initWorkbench(options: InitVscodeOptions) {
         },
         builtinExtensions
     );
+}
+
+function buildOriginPath(publicPath: string,
+    vscodeVersionHash: string) {
+    let path = globalThis.location.origin + publicPath;
+    if (!publicPath.endsWith('/')) {
+        path += '/';
+    }
+    path += vscodeVersionHash;
+
+    return path;
+}
+
+function buildVscodePath(originPath: string) {
+    if (!originPath.endsWith('/')) {
+        originPath += '/';
+    }
+    return originPath + 'vscode';
 }
 
 export enum LogLevel {
