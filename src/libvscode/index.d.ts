@@ -9,7 +9,10 @@ export function initVSCode(options: InitVscodeOptions): Promise<IDisposable>;
  * @param publicPath The public path that the extensions should be fetched from.
  * @param vscodeVersionHash The version hash that libvscode was built from.
  */
-export async function fetchBuiltinExtensions(publicPath: string, vscodeVersionHash?: string): Promise<IScannedBuiltinExtension[]>;
+export async function fetchBuiltinExtensions(
+    publicPath: string,
+    vscodeVersionHash?: string
+): Promise<IScannedBuiltinExtension[]>;
 
 /**
  * Gets the hash that libvscode was built from.
