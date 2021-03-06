@@ -8,15 +8,11 @@ This project is a fork of [github1s](https://github.com/conwnet/github1s) that p
 
 To bootstrap this project, do the following steps:
 
-1. After cloning, run `./scripts/pre-install.sh`.
-```
-$ ./scripts/pre-install.sh
-```
-2. Install NPM dependencies
+1. Install NPM dependencies
 ```
 $ yarn
 ```
-3. Run `yarn run husky install` and `./scripts/postinstall.sh`
+2. Bootstrap the project.
 ```
-$ yarn run husky install && ./scripts/postinstall.sh
+$ yarn bootstrap
 ```

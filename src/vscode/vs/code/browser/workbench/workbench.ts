@@ -32,17 +32,7 @@ import { localize } from 'vs/nls';
 import { Schemas } from 'vs/base/common/network';
 import product from 'vs/platform/product/common/product';
 import { parseLogLevel } from 'vs/platform/log/common/log';
-import { getBrowserUrl, replaceBrowserUrl } from 'vs/github1s/util';
 import { IScannedBuiltinExtension } from 'vs/workbench/services/extensionManagement/browser/builtinExtensionsScannerService';
-
-// custom vs code commands defined by github1s
-const getGitHub1sCustomCommands: () => {
-    id: string;
-    handler: (...args: any[]) => unknown;
-}[] = () => [
-    { id: 'github1s.vscode.get-browser-url', handler: getBrowserUrl },
-    { id: 'github1s.vscode.replace-browser-url', handler: replaceBrowserUrl },
-];
 
 function doCreateUri(path: string, queryValues: Map<string, string>): URI {
     let query: string | undefined = undefined;
@@ -494,47 +484,9 @@ class WindowIndicator implements IWindowIndicator {
     readonly tooltip: string;
     readonly command: string | undefined;
 
-    constructor(workspace: IWorkspace) {
-        let repositoryOwner: string | undefined = undefined;
-        let repositoryName: string | undefined = undefined;
-
-        if (workspace) {
-            let uri: URI | undefined = undefined;
-            if (isFolderToOpen(workspace)) {
-                uri = workspace.folderUri;
-            } else if (isWorkspaceToOpen(workspace)) {
-                uri = workspace.workspaceUri;
-            }
-
-            if (uri?.scheme === 'github1s') {
-                [
-                    repositoryOwner = 'conwnet',
-                    repositoryName = 'github1s',
-                ] = URI.parse(getBrowserUrl()).path.split('/').filter(Boolean);
-            }
-        }
-
-        // Repo
-        if (repositoryName && repositoryOwner) {
-            this.label = localize(
-                'playgroundLabelRepository',
-                '$(remote) GitHub1s: {0}/{1}',
-                repositoryOwner,
-                repositoryName
-            );
-            this.tooltip = localize(
-                'playgroundRepositoryTooltip',
-                'GitHub1s: {0}/{1}',
-                repositoryOwner,
-                repositoryName
-            );
-        }
-
-        // No Repo
-        else {
-            this.label = localize('playgroundLabel', '$(remote) GitHub1s');
-            this.tooltip = localize('playgroundTooltip', 'GitHub1s');
-        }
+    constructor() {
+        this.label = localize('playgroundLabel', '$(remote) VSCode');
+        this.tooltip = localize('playgroundTooltip', 'VSCode');
     }
 }
 
@@ -631,7 +583,7 @@ export function init(
     // Window indicator (unless connected to a remote)
     let windowIndicator: WindowIndicator | undefined = undefined;
     if (!workspaceProvider.hasRemote()) {
-        windowIndicator = new WindowIndicator(workspace);
+        windowIndicator = new WindowIndicator();
     }
 
     // Product Quality Change Handler
@@ -684,7 +636,6 @@ export function init(
     // Finally create workbench
     return create(element, {
         ...config,
-        commands: getGitHub1sCustomCommands(),
         logLevel: logLevel ? parseLogLevel(logLevel) : undefined,
         settingsSyncOptions,
         homeIndicator,

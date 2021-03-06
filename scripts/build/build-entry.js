@@ -3,7 +3,7 @@ const alias = require('esbuild-plugin-alias');
 const path = require('path');
 const fs = require('fs');
 
-async function main() {
+async function buildEntry() {
     const initialSource = await fs.promises.readFile(
         path.resolve(__dirname, '../../src/libvscode/loader.js'),
         'utf8'
@@ -67,4 +67,6 @@ async function main() {
     );
 }
 
-main();
+module.exports = {
+    buildEntry
+};
