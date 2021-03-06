@@ -4,9 +4,10 @@ const exec = promisify(child_process.execFile);
 const fs = require('fs');
 
 async function checkFileExists(file) {
-    return fs.promises.access(file, fs.constants.F_OK)
+    return fs.promises
+        .access(file, fs.constants.F_OK)
         .then(() => true)
-        .catch(() => false)
+        .catch(() => false);
 }
 
 async function execFile(file, args, options) {
@@ -14,7 +15,7 @@ async function execFile(file, args, options) {
         const result = await exec(file, args, {
             stdio: 'inherit',
             shell: true,
-            ...(options || {})
+            ...(options || {}),
         });
 
         process.stdout.write(result.stdout);

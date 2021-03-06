@@ -15,20 +15,32 @@ gulp.task('bootstrap', async () => {
 });
 
 gulp.task('package:vscode', async () => {
-    return gulp.src('./lib/vscode/out-vscode-min/**')
+    return gulp
+        .src('./lib/vscode/out-vscode-min/**')
         .pipe(gulp.dest('./dist/static/vscode/'));
 });
 
 gulp.task('package:builtin-extensions', async () => {
-    const extension = path.resolve(__dirname, 'lib', 'vscode', 'extensions', 'emmet', 'dist', 'browser');
+    const extension = path.resolve(
+        __dirname,
+        'lib',
+        'vscode',
+        'extensions',
+        'emmet',
+        'dist',
+        'browser'
+    );
     if (!(await checkFileExists(extension))) {
         await execFile('yarn', ['gulp', 'compile-web'], { cwd: vscode });
     }
 });
 
-gulp.task('package:extensions', gulp.series('package:builtin-extensions', async () => {
-    await copyExtensions();
-}));
+gulp.task(
+    'package:extensions',
+    gulp.series('package:builtin-extensions', async () => {
+        await copyExtensions();
+    })
+);
 
 const deps = [
     'vscode-textmate',
@@ -39,18 +51,22 @@ const deps = [
     'xterm-addon-webgl',
     'tas-client-umd',
     'iconv-lite-umd',
-    'jschardet'
+    'jschardet',
 ];
 
-gulp.task('package:node-modules', gulp.parallel(deps.map(d => () => {
-    return gulp.src(`./lib/vscode/node_modules/${d}/**/*`)
-        .pipe(gulp.dest(`./dist/static/node_modules/${d}/`));
-})));
+gulp.task(
+    'package:node-modules',
+    gulp.parallel(
+        deps.map((d) => () => {
+            return gulp
+                .src(`./lib/vscode/node_modules/${d}/**/*`)
+                .pipe(gulp.dest(`./dist/static/node_modules/${d}/`));
+        })
+    )
+);
 
 gulp.task('package:resources', async () => {
-    return gulp.src([
-        './resources/test.html'
-    ]).pipe(gulp.dest('./dist'));
+    return gulp.src(['./resources/test.html']).pipe(gulp.dest('./dist'));
 });
 
 gulp.task('package:config', async () => {
@@ -67,26 +83,36 @@ gulp.task('hash', async () => {
 });
 
 gulp.task('build:vscode:sync', async () => {
-    return gulp.src('./src/vscode/**/*')
-        .pipe(gulp.dest('./lib/vscode/src/'));
+    return gulp.src('./src/vscode/**/*').pipe(gulp.dest('./lib/vscode/src/'));
 });
 
-
 gulp.task('build:vscode:copy', async () => {
-    return gulp.src('./resources/gulp-vscode-extra.js')
+    return gulp
+        .src('./resources/gulp-vscode-extra.js')
         .pipe(gulp.dest('./lib/vscode/'));
 });
 
 gulp.task('build:vscode:gulp', async () => {
     await execFile('yarn', ['gulp', 'compile-build'], { cwd: vscode });
-    await execFile('yarn', ['gulp', 'optimize', '--gulpfile', './gulp-vscode-extra.js'], { cwd: vscode });
-    await execFile('yarn', ['gulp', 'minify', '--gulpfile', './gulp-vscode-extra.js'], { cwd: vscode });
+    await execFile(
+        'yarn',
+        ['gulp', 'optimize', '--gulpfile', './gulp-vscode-extra.js'],
+        { cwd: vscode }
+    );
+    await execFile(
+        'yarn',
+        ['gulp', 'minify', '--gulpfile', './gulp-vscode-extra.js'],
+        { cwd: vscode }
+    );
 });
 
-gulp.task('build:vscode', gulp.series('build:vscode:sync', 'build:vscode:copy', 'build:vscode:gulp'));
+gulp.task(
+    'build:vscode',
+    gulp.series('build:vscode:sync', 'build:vscode:copy', 'build:vscode:gulp')
+);
 
 gulp.task('build:extensions', async () => {
-    for (let dir of (await fs.promises.readdir('./extensions'))) {
+    for (let dir of await fs.promises.readdir('./extensions')) {
         if (await checkFileExists(path.join(dir, 'package.json'))) {
             await execFile('yarn', ['compile'], { cwd: dir });
         }
@@ -98,19 +124,32 @@ gulp.task('build:entry', async () => {
     await buildEntry();
 });
 
-gulp.task('package', gulp.parallel(
-    'package:vscode',
-    'package:extensions',
-    'package:node-modules',
-    'package:resources',
-    'package:config'
-));
+gulp.task(
+    'package',
+    gulp.parallel(
+        'package:vscode',
+        'package:extensions',
+        'package:node-modules',
+        'package:resources',
+        'package:config'
+    )
+);
 
 gulp.task('clean', async () => {
     return del('./dist/**');
 });
 
-gulp.task('build', gulp.series('clean', 'build:vscode', 'build:extensions', 'package', 'hash', 'build:entry'));
+gulp.task(
+    'build',
+    gulp.series(
+        'clean',
+        'build:vscode',
+        'build:extensions',
+        'package',
+        'hash',
+        'build:entry'
+    )
+);
 
 function sleep(ms) {
     return new Promise((resolve, reject) => setTimeout(resolve, ms));

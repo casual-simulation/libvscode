@@ -14,12 +14,15 @@ async function buildEntry() {
     );
     const distFolder = path.resolve(__dirname, '../../dist');
     const distFolders = await fs.promises.readdir(distFolder);
-    const staticFolder = distFolders.find(f => /^static/.test(f));
+    const staticFolder = distFolders.find((f) => /^static/.test(f));
 
     const finalLoaderSource = initialSource + loaderSource;
-    await fs.promises.mkdir(path.resolve(__dirname, '../../dist', staticFolder), {
-        recursive: true,
-    });
+    await fs.promises.mkdir(
+        path.resolve(__dirname, '../../dist', staticFolder),
+        {
+            recursive: true,
+        }
+    );
     await fs.promises.writeFile(
         path.resolve(__dirname, '../../dist', staticFolder, 'loader.js'),
         finalLoaderSource,
@@ -38,19 +41,15 @@ async function buildEntry() {
         minify: true,
         sourcemap: true,
         define: {
-            VSCODE_VERSION_HASH: JSON.stringify(staticFolder)
-        }
+            VSCODE_VERSION_HASH: JSON.stringify(staticFolder),
+        },
     });
 
     await esbuild.build({
         entryPoints: [path.resolve(__dirname, '../../src/libvscode/test.js')],
         plugins: [
             alias({
-                libvscode: path.resolve(
-                    __dirname,
-                    '../../dist',
-                    'index.js'
-                ),
+                libvscode: path.resolve(__dirname, '../../dist', 'index.js'),
             }),
         ],
         bundle: true,
@@ -68,5 +67,5 @@ async function buildEntry() {
 }
 
 module.exports = {
-    buildEntry
+    buildEntry,
 };

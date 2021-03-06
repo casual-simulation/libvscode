@@ -85,10 +85,7 @@ const scanExtraExtensions = () => {
 
 const main = () => {
     const CONFIGURE_PATH = path.join(APP_ROOT, 'dist/static/configure');
-    const extensions = [
-        ...scanBuiltinExtensions(),
-        ...scanExtraExtensions(),
-    ];
+    const extensions = [...scanBuiltinExtensions(), ...scanExtraExtensions()];
 
     fs.ensureDirSync(CONFIGURE_PATH);
     fs.writeFileSync(
@@ -98,5 +95,5 @@ const main = () => {
 };
 
 module.exports = {
-    main
+    main,
 };

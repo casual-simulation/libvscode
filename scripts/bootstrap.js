@@ -17,13 +17,25 @@ async function bootstrap() {
 
     const lib = path.resolve(__dirname, '..', 'lib');
     const vscode = path.resolve(lib, 'vscode');
-    if (!await checkFileExists(vscode)) {
+    if (!(await checkFileExists(vscode))) {
         console.log('Downloading vscode...');
         await fs.promises.mkdir(lib, { recursive: true });
-        await execFile('git', ['clone', '--depth', '1', '-b', '1.52.1', 'https://github.com/microsoft/vscode.git', 'vscode'], {
-            cwd: lib,
-            shell: true
-        });
+        await execFile(
+            'git',
+            [
+                'clone',
+                '--depth',
+                '1',
+                '-b',
+                '1.52.1',
+                'https://github.com/microsoft/vscode.git',
+                'vscode',
+            ],
+            {
+                cwd: lib,
+                shell: true,
+            }
+        );
         console.log('Done.');
 
         console.log('Installing vscode packages...');
@@ -33,5 +45,5 @@ async function bootstrap() {
 }
 
 module.exports = {
-    bootstrap
+    bootstrap,
 };
