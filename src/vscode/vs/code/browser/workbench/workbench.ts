@@ -477,19 +477,6 @@ class WorkspaceProvider implements IWorkspaceProvider {
     }
 }
 
-class WindowIndicator implements IWindowIndicator {
-    readonly onDidChange = Event.None;
-
-    readonly label: string;
-    readonly tooltip: string;
-    readonly command: string | undefined;
-
-    constructor() {
-        this.label = localize('playgroundLabel', '$(remote) VSCode');
-        this.tooltip = localize('playgroundTooltip', 'VSCode');
-    }
-}
-
 export function init(
     element: HTMLElement,
     config: IWorkbenchConstructionOptions & {
@@ -568,24 +555,6 @@ export function init(
     // Workspace Provider
     const workspaceProvider = new WorkspaceProvider(workspace, payload);
 
-    // Home Indicator
-    const [repoOwner = 'conwnet', repoName = 'github1s'] = (
-        URI.parse(window.location.href).path || ''
-    )
-        .split('/')
-        .filter(Boolean);
-    const homeIndicator: IHomeIndicator = {
-        href: `https://github.com/${repoOwner}/${repoName}`,
-        icon: 'github',
-        title: localize('home', 'Home'),
-    };
-
-    // Window indicator (unless connected to a remote)
-    let windowIndicator: WindowIndicator | undefined = undefined;
-    if (!workspaceProvider.hasRemote()) {
-        windowIndicator = new WindowIndicator();
-    }
-
     // Product Quality Change Handler
     const productQualityChangeHandler: IProductQualityChangeHandler = (
         quality
@@ -638,8 +607,6 @@ export function init(
         ...config,
         logLevel: logLevel ? parseLogLevel(logLevel) : undefined,
         settingsSyncOptions,
-        homeIndicator,
-        windowIndicator,
         productQualityChangeHandler,
         workspaceProvider,
         urlCallbackProvider: new PollingURLCallbackProvider(),

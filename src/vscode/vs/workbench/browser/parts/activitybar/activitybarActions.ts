@@ -314,7 +314,7 @@ export class HomeActivityActionViewItem extends MenuActivityActionViewItem {
         );
     }
 
-    // modify-by-github1s, open current github repository in an new Tab directly
+    // modify-by-libvscode, open current github repository in an new Tab directly
     render(container: HTMLElement): void {
         super.render(container);
 

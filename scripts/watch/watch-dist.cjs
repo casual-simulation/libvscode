@@ -40,26 +40,10 @@ const autoSyncVscodeOut = async () => {
     );
 };
 
-const autoSyncGitHub1sExtension = async () => {
-    const SOURCE = path.join(APP_ROOT, 'extensions');
-    const TARGET = path.join(APP_ROOT, 'dist/static/extensions');
-
-    await util.promisify(cp.exec)(`rsync -a ${SOURCE}/ ${TARGET}`);
-
-    chokidar.watch(SOURCE).on(
-        'all',
-        debounce((_, path) => {
-            cp.exec(`rsync -a ${SOURCE}/ ${TARGET}`);
-            console.log(`sync ${path}`);
-        }, 300)
-    );
-};
-
 const main = () => {
     fs.ensureDirSync(path.join(APP_ROOT, 'dist/static'));
 
     autoSyncVscodeOut();
-    autoSyncGitHub1sExtension();
 };
 
 main();

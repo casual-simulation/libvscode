@@ -73,14 +73,14 @@ gulp.task('build:vscode:sync', async () => {
 
 
 gulp.task('build:vscode:copy', async () => {
-    return gulp.src('./resources/gulp-github1s.js')
+    return gulp.src('./resources/gulp-vscode-extra.js')
         .pipe(gulp.dest('./lib/vscode/'));
 });
 
 gulp.task('build:vscode:gulp', async () => {
     await execFile('yarn', ['gulp', 'compile-build'], { cwd: vscode });
-    await execFile('yarn', ['gulp', 'optimize', '--gulpfile', './gulp-github1s.js'], { cwd: vscode });
-    await execFile('yarn', ['gulp', 'minify', '--gulpfile', './gulp-github1s.js'], { cwd: vscode });
+    await execFile('yarn', ['gulp', 'optimize', '--gulpfile', './gulp-vscode-extra.js'], { cwd: vscode });
+    await execFile('yarn', ['gulp', 'minify', '--gulpfile', './gulp-vscode-extra.js'], { cwd: vscode });
 });
 
 gulp.task('build:vscode', gulp.series('build:vscode:sync', 'build:vscode:copy', 'build:vscode:gulp'));

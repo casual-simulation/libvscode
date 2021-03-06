@@ -27,5 +27,5 @@ const server = http.createServer((request, response) => {
 });
 
 server.listen(5000, () => {
-    console.log('Running GitHub1s at http://localhost:5000');
+    console.log('Running libvscode at http://localhost:5000');
 });

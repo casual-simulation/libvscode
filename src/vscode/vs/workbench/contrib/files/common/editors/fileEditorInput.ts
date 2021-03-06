@@ -239,7 +239,7 @@ export class FileEditorInput
     }
 
     private decorateLabel(label: string): string {
-        // modify-by-github1s, remove read-only tips
+        // modify-by-libvscode, remove read-only tips
         // const orphaned = this.model?.hasState(TextFileEditorModelState.ORPHAN);
         // const readonly = this.isReadonly();
 

@@ -626,9 +626,10 @@ import { isStandalone } from 'vs/base/browser/browser';
                         return '${activeEditorShort}${separator}${rootName}'; // macOS has native dirty indicator
                     }
 
-                    // modify-by-github1s, change page title
-                    const base =
-                        '${dirty}${activeEditorShort}${separator}${owner}/${repo}${separator}${appName}';
+                    const base = '${dirty}${activeEditorShort}${separator}${rootName}${separator}${appName}';
+                    if (isWeb) {
+                        return base + '${separator}${remoteName}'; // Web: always show remote name
+                    }
 
                     return base;
                 })(),
@@ -709,25 +710,25 @@ import { isStandalone } from 'vs/base/browser/browser';
                     ),
                     isMacintosh
                         ? nls.localize(
-                              'window.openFilesInNewWindow.defaultMac',
-                              "Files will open in the window with the files' folder open or the last active window unless opened via the Dock or from Finder."
-                          )
+                            'window.openFilesInNewWindow.defaultMac',
+                            "Files will open in the window with the files' folder open or the last active window unless opened via the Dock or from Finder."
+                        )
                         : nls.localize(
-                              'window.openFilesInNewWindow.default',
-                              'Files will open in a new window unless picked from within the application (e.g. via the File menu).'
-                          ),
+                            'window.openFilesInNewWindow.default',
+                            'Files will open in a new window unless picked from within the application (e.g. via the File menu).'
+                        ),
                 ],
                 default: 'off',
                 scope: ConfigurationScope.APPLICATION,
                 markdownDescription: isMacintosh
                     ? nls.localize(
-                          'openFilesInNewWindowMac',
-                          'Controls whether files should open in a new window. \nNote that there can still be cases where this setting is ignored (e.g. when using the `--new-window` or `--reuse-window` command line option).'
-                      )
+                        'openFilesInNewWindowMac',
+                        'Controls whether files should open in a new window. \nNote that there can still be cases where this setting is ignored (e.g. when using the `--new-window` or `--reuse-window` command line option).'
+                    )
                     : nls.localize(
-                          'openFilesInNewWindow',
-                          'Controls whether files should open in a new window.\nNote that there can still be cases where this setting is ignored (e.g. when using the `--new-window` or `--reuse-window` command line option).'
-                      ),
+                        'openFilesInNewWindow',
+                        'Controls whether files should open in a new window.\nNote that there can still be cases where this setting is ignored (e.g. when using the `--new-window` or `--reuse-window` command line option).'
+                    ),
             },
             'window.openFoldersInNewWindow': {
                 type: 'string',

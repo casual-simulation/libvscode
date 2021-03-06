@@ -11,9 +11,9 @@ let _isLinux = false;
 let _isNative = false;
 let _isWeb = false;
 let _isIOS = false;
-// below codes are changed by github1s
+// below codes are changed by libvscode
 let _isMobile = false;
-// above codes are changed by github1s
+// above codes are changed by libvscode
 let _locale: string | undefined = undefined;
 let _language: string = LANGUAGE_DEFAULT;
 let _translationsConfigFile: string | undefined = undefined;
@@ -85,7 +85,7 @@ if (typeof navigator === 'object' && !isElectronRenderer) {
         navigator.maxTouchPoints > 0;
     _isLinux = _userAgent.indexOf('Linux') >= 0;
     _isWeb = true;
-    // below codes are changed by github1s
+    // below codes are changed by libvscode
     // this code is from http://detectmobilebrowsers.com/
     // eslint-disable-next-line
     _isMobile = (function (a) {
@@ -98,7 +98,7 @@ if (typeof navigator === 'object' && !isElectronRenderer) {
             )
         );
     })(navigator.userAgent);
-    // above codes are changed by github1s
+    // above codes are changed by libvscode
     _locale = navigator.language;
     _language = _locale;
 }

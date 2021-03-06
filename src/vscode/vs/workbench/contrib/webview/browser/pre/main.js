@@ -326,7 +326,7 @@
             // make sure we block the browser from dispatching it. Instead VS Code
             // handles these events and will dispatch a copy/paste/fuzzy back to the webview
             // if needed
-            // modify-by-github1s, preventDefault when press ctrl/cmd+p
+            // modify-by-libvscode, preventDefault when press ctrl/cmd+p
             if (isUndoRedo(e) || isFuzzySearch(e)) {
                 e.preventDefault();
             } else if (isCopyPasteOrCut(e)) {
@@ -370,7 +370,7 @@
         /**
          * @param {KeyboardEvent} e
          * @return {boolean}
-         * modify-by-github1s, preventDefault when press ctrl/cmd+p
+         * modify-by-libvscode, preventDefault when press ctrl/cmd+p
          */
         function isFuzzySearch(e) {
             const hasMeta = e.ctrlKey || e.metaKey;

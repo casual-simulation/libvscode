@@ -598,21 +598,10 @@ class BrowserMain extends Disposable {
         }
 
         // Single-folder workspace
-        // below codes are changed by github1s
         if (workspace && isFolderToOpen(workspace)) {
-            // modify-by-vscode, use string `owner+repo:path` to generate id
-            // In this way, the workspaceState will be isolated between from different repo
-            const [owner = 'conwnet', repo = 'github1s'] = URI.parse(
-                window.location.href
-            )
-                .path.split('/')
-                .filter(Boolean);
-            const id = hash(
-                `${owner}+${repo}:${workspace.folderUri.toString()}`
-            ).toString(16);
+            const id = hash(workspace.folderUri.toString()).toString(16);
             return { id, folder: workspace.folderUri };
         }
-        // above codes are changed by github1s
 
         return { id: 'empty-window' };
     }

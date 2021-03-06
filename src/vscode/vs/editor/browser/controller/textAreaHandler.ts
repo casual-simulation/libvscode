@@ -178,14 +178,14 @@ export class TextAreaHandler extends ViewPart {
         this.textArea.setAttribute('aria-haspopup', 'false');
         this.textArea.setAttribute('aria-autocomplete', 'both');
 
-        // below codes are changed by github1s
+        // below codes are changed by libvscode
         // the readonly attribute of textarea break the `vscode.workspace.onDidChangeTextDocument`
         // only set readonly attribute to textarea when use a mobile device
         // https://github.com/microsoft/vscode/issues/117755
         if (platform.isMobile && options.get(EditorOption.readOnly)) {
             this.textArea.setAttribute('readonly', 'true');
         }
-        // above codes are changed by github1s
+        // above codes are changed by libvscode
 
         this.textAreaCover = createFastDomNode(document.createElement('div'));
         this.textAreaCover.setPosition('absolute');
@@ -560,7 +560,7 @@ export class TextAreaHandler extends ViewPart {
             String(options.get(EditorOption.tabIndex))
         );
 
-        // below codes are changed by github1s
+        // below codes are changed by libvscode
         // the readonly attribute of textarea break the `vscode.workspace.onDidChangeTextDocument`
         // only set readonly attribute to textarea when use a mobile device
         // https://github.com/microsoft/vscode/issues/117755
@@ -571,7 +571,7 @@ export class TextAreaHandler extends ViewPart {
                 this.textArea.removeAttribute('readonly');
             }
         }
-        // above codes are changed by github1s
+        // above codes are changed by libvscode
 
         if (e.hasChanged(EditorOption.accessibilitySupport)) {
             this._textAreaInput.writeScreenReaderContent('strategy changed');

@@ -53,7 +53,7 @@
     height: 48px;
 }
 
-/** modify-by-github1s, add homeIndicator click style */
+/** modify-by-libvscode, add homeIndicator click style */
 .monaco-workbench .activitybar > .content > .home-bar:hover {
     opacity: 0.7;
 }

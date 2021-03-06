@@ -307,7 +307,7 @@ export async function readAuthenticationTrustedDomains(
 }
 
 // modify by vscode
-const github1sDefaultTrustedDomains = [
+const libvscodeDefaultTrustedDomains = [
     '*.github.com',
     '*.microsoft.com',
     '*.github1s.com',
@@ -322,9 +322,9 @@ export function readStaticTrustedDomains(
     const defaultTrustedDomains: string[] = productService.linkProtectionTrustedDomains
         ? [
               ...productService.linkProtectionTrustedDomains,
-              ...github1sDefaultTrustedDomains,
+              ...libvscodeDefaultTrustedDomains,
           ]
-        : [...github1sDefaultTrustedDomains];
+        : [...libvscodeDefaultTrustedDomains];
 
     let trustedDomains: string[] = [];
     try {

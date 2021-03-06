@@ -979,7 +979,7 @@ export class ActivitybarPart extends Part implements IActivityBarService {
             })
         );
 
-        // modify-by-github1s, hide home-bar-icon-badge
+        // modify-by-libvscode, hide home-bar-icon-badge
         // const homeBarIconBadge = document.createElement('div');
         // homeBarIconBadge.classList.add('home-bar-icon-badge');
         // this.homeBarContainer.appendChild(homeBarIconBadge);

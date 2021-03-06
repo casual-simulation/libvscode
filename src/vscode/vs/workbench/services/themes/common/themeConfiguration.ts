@@ -35,7 +35,7 @@ import {
     IConfigurationService,
     ConfigurationTarget,
 } from 'vs/platform/configuration/common/configuration';
-// modify-by-github1s, default dark theme
+// modify-by-libvscode, default dark theme
 import { isMacintosh, isWindows } from 'vs/base/common/platform';
 
 const DEFAULT_THEME_DARK_SETTING_VALUE = 'Default Dark+';
@@ -61,7 +61,7 @@ const colorThemeSettingSchema: IConfigurationPropertySchema = {
         'colorTheme',
         'Specifies the color theme used in the workbench.'
     ),
-    // modify-by-github1s, default dark theme
+    // modify-by-libvscode, default dark theme
     default: DEFAULT_THEME_DARK_SETTING_VALUE,
     enum: colorThemeSettingEnum,
     enumDescriptions: colorThemeSettingEnumDescriptions,
