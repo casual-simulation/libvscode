@@ -10,13 +10,11 @@ import {
     IURLCallbackProvider,
     IWorkspaceProvider,
     IWorkspace,
-    IWindowIndicator,
-    IHomeIndicator,
     IProductQualityChangeHandler,
     ISettingsSyncOptions,
 } from 'vs/workbench/workbench.web.api';
 import { URI, UriComponents } from 'vs/base/common/uri';
-import { Event, Emitter } from 'vs/base/common/event';
+import { Emitter } from 'vs/base/common/event';
 import { generateUuid } from 'vs/base/common/uuid';
 import { CancellationToken } from 'vs/base/common/cancellation';
 import { streamToBuffer } from 'vs/base/common/buffer';
@@ -28,7 +26,6 @@ import {
 } from 'vs/platform/windows/common/windows';
 import { isEqual } from 'vs/base/common/resources';
 import { isStandalone } from 'vs/base/browser/browser';
-import { localize } from 'vs/nls';
 import { Schemas } from 'vs/base/common/network';
 import product from 'vs/platform/product/common/product';
 import { parseLogLevel } from 'vs/platform/log/common/log';

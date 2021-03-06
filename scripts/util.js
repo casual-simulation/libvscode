@@ -10,15 +10,21 @@ async function checkFileExists(file) {
 }
 
 async function execFile(file, args, options) {
-    const result = await exec(file, args, {
-        stdio: 'inherit',
-        shell: true,
-        ...(options || {})
-    });
+    try {
+        const result = await exec(file, args, {
+            stdio: 'inherit',
+            shell: true,
+            ...(options || {})
+        });
 
-    console.log(result.stdout.toString('utf-8'));
-    console.log(result.stderr.toString('utf-8'));
-    return result;
+        process.stdout.write(result.stdout);
+        process.stderr.write(result.stderr);
+        return result;
+    } catch (err) {
+        process.stdout.write(err.stdout);
+        process.stderr.write(err.stderr);
+        throw err;
+    }
 }
 
 module.exports = {

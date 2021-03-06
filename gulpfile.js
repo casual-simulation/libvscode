@@ -94,6 +94,7 @@ gulp.task('build:extensions', async () => {
 });
 
 gulp.task('build:entry', async () => {
+    await sleep(100);
     await buildEntry();
 });
 
