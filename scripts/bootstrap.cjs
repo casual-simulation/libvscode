@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { checkFileExists, execFile } = require('./util');
+const { checkFileExists, execFile } = require('./util.cjs');
 
 async function bootstrap() {
     const extensionsPath = path.resolve(__dirname, '..', 'extensions');

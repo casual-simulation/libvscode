@@ -4,6 +4,7 @@
     "description": "VSCode packaged into a ESM library",
     "main": "dist/index.js",
     "module": "dist/index.js",
+    "type": "module",
     "types": "dist/index.d.ts",
     "directories": {
         "lib": "lib"
@@ -37,12 +38,12 @@
     },
     "scripts": {
         "clean-build": "./scripts/clean-build.sh",
-        "clean": "gulp clean",
-        "build": "gulp build",
-        "build:entry": "gulp build:entry",
-        "bootstrap": "gulp bootstrap",
-        "hash": "gulp hash",
-        "package": "gulp package",
+        "clean": "gulp clean --gulpfile gulpfile.cjs",
+        "build": "gulp build --gulpfile gulpfile.cjs",
+        "build:entry": "gulp build:entry --gulpfile gulpfile.cjs",
+        "bootstrap": "gulp bootstrap --gulpfile gulpfile.cjs",
+        "hash": "gulp hash --gulpfile gulpfile.cjs",
+        "package": "gulp package --gulpfile gulpfile.cjs",
         "watch": "rm -rf dist && run-p watch:*",
         "watch:setup": "./scripts/watch.sh",
         "watch:vscode": "cd lib/vscode && yarn watch",

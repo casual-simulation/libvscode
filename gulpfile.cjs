@@ -1,12 +1,12 @@
 const gulp = require('gulp');
-const { bootstrap } = require('./scripts/bootstrap');
-const { checkFileExists, execFile } = require('./scripts/util');
-const { main: copyExtensions } = require('./scripts/package/copy-extensions');
-const { main: generateConfig } = require('./scripts/package/generate-config');
+const { bootstrap } = require('./scripts/bootstrap.cjs');
+const { checkFileExists, execFile } = require('./scripts/util.cjs');
+const { main: copyExtensions } = require('./scripts/package/copy-extensions.cjs');
+const { main: generateConfig } = require('./scripts/package/generate-config.cjs');
 const path = require('path');
 const fs = require('fs');
 const del = require('del');
-const { buildEntry } = require('./scripts/build/build-entry');
+const { buildEntry } = require('./scripts/build/build-entry.cjs');
 
 const vscode = path.resolve(__dirname, 'lib', 'vscode');
 
