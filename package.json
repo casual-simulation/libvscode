@@ -1,6 +1,6 @@
 {
     "name": "@casual-simulation/libvscode",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "description": "VSCode packaged into a ESM library",
     "main": "dist/index.js",
     "module": "dist/index.js",
