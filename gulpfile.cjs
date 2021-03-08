@@ -14,7 +14,7 @@ gulp.task('bootstrap', async () => {
     await bootstrap();
 });
 
-gulp.task('package:vscode', async () => {
+gulp.task('package:vscode', () => {
     return gulp
         .src('./lib/vscode/out-vscode-min/**')
         .pipe(gulp.dest('./dist/static/vscode/'));
@@ -82,11 +82,11 @@ gulp.task('hash', async () => {
     await fs.promises.rename('./dist/static', `./dist/${staticFolderName}`);
 });
 
-gulp.task('build:vscode:sync', async () => {
+gulp.task('build:vscode:sync', () => {
     return gulp.src('./src/vscode/**/*').pipe(gulp.dest('./lib/vscode/src/'));
 });
 
-gulp.task('build:vscode:copy', async () => {
+gulp.task('build:vscode:copy', () => {
     return gulp
         .src('./resources/gulp-vscode-extra.js')
         .pipe(gulp.dest('./lib/vscode/'));
