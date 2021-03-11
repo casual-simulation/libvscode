@@ -34,6 +34,7 @@ export async function initVSCode(
         options.vscodeVersionHash = VSCODE_VERSION_HASH;
     }
     (<any>globalThis).VSCODE_PUBLIC_PATH = options.publicPath;
+    (<any>globalThis).VSCODE_DOM_ELEMENT = options.container;
     await initLoader(options);
     return await initWorkbench(options);
 }
